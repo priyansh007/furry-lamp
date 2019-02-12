@@ -1,0 +1,283 @@
+﻿
+-------------------------- System Environment --------------------------
+
+StaxRip    : 1.9.0.0
+Windows    : Windows 10 Pro 1803
+Language   : English (India)
+CPU        : Intel(R) Core(TM) i5-6600 CPU @ 3.30GHz
+GPU        : NVIDIA GeForce GTX 970M
+Memory     : 8 GB
+Resolution : 1920 x 1080
+DPI        : 120
+
+------------------------ MediaInfo Source File ------------------------
+
+E:\N.I.B.B.A.S\20170825_100649.mp4
+
+General
+Complete name              : E:\N.I.B.B.A.S\20170825_100649.mp4
+Format                     : MPEG-4
+Format profile             : Base Media / Version 2
+Codec ID                   : mp42 (isom/mp42)
+File size                  : 121 MiB
+Duration                   : 58 s 560 ms
+Overall bit rate           : 17.3 Mb/s
+Encoded date               : UTC 2017-08-25 04:37:49
+Tagged date                : UTC 2017-08-25 04:37:49
+com.android.version        : 6.0.1
+
+Video
+ID                         : 1
+Format                     : AVC
+Format/Info                : Advanced Video Codec
+Format profile             : High@L4
+Format settings            : CABAC / 1 Ref Frames
+Format, CABAC              : Yes
+Format, ReFrames           : 1 frame
+Format, GOP                : M=1, N=30
+Codec ID                   : avc1
+Codec ID/Info              : Advanced Video Coding
+Duration                   : 58 s 553 ms
+Bit rate                   : 17.0 Mb/s
+Width                      : 1 920 pixels
+Height                     : 1 080 pixels
+Display aspect ratio       : 16:9
+Frame rate mode            : Variable
+Frame rate                 : 30.041 FPS
+Minimum frame rate         : 26.216 FPS
+Maximum frame rate         : 35.115 FPS
+Color space                : YUV
+Chroma subsampling         : 4:2:0
+Bit depth                  : 8 bits
+Scan type                  : Progressive
+Bits/(Pixel*Frame)         : 0.273
+Stream size                : 119 MiB (98%)
+Title                      : VideoHandle
+Language                   : English
+Encoded date               : UTC 2017-08-25 04:37:49
+Tagged date                : UTC 2017-08-25 04:37:49
+mdhd_Duration              : 58553
+Codec configuration box    : avcC
+
+Audio
+ID                         : 2
+Format                     : AAC LC
+Format/Info                : Advanced Audio Codec Low Complexity
+Codec ID                   : mp4a-40-2
+Duration                   : 58 s 560 ms
+Source duration            : 58 s 565 ms
+Source_Duration_FirstFrame : 5 ms
+Bit rate mode              : Constant
+Bit rate                   : 256 kb/s
+Channel(s)                 : 2 channels
+Channel layout             : L R
+Sampling rate              : 48.0 kHz
+Frame rate                 : 46.875 FPS (1024 SPF)
+Compression mode           : Lossy
+Stream size                : 1.79 MiB (1%)
+Source stream size         : 1.79 MiB (1%)
+Title                      : SoundHandle
+Language                   : English
+Encoded date               : UTC 2017-08-25 04:37:49
+Tagged date                : UTC 2017-08-25 04:37:49
+mdhd_Duration              : 58560
+
+-------------- Demux audio using MP4Box 0.7.2-DEV-rev705 --------------
+
+"E:\N.I.B.B.A.S\StaxRip 1.9.0.0\Apps\MP4Box\MP4Box.exe" -single 2 -out "E:\N.I.B.B.A.S\20170825_100649_temp\20170825_100649 ID1 English SoundHandle.mka" E:\N.I.B.B.A.S\20170825_100649.mp4
+
+[iso file] Unknown box type SDLN
+[iso file] Unknown box type smrd
+[iso file] Unknown box type smta
+[iso file] Unknown box type
+[iso file] Unknown box type keys
+[iso file] Unknown box type ....
+[iso file] Box "data" is invalid in container ....
+
+Start:    01:26:37 PM
+End:      01:26:38 PM
+Duration: 00:00:00
+
+General
+Complete name         : E:\N.I.B.B.A.S\20170825_100649_temp\20170825_100649 ID1 English SoundHandle.mka
+Format                : MPEG-4
+Format profile        : Base Media
+Codec ID              : isom (isom)
+File size             : 1.80 MiB
+Duration              : 58 s 565 ms
+Overall bit rate mode : Variable
+Overall bit rate      : 258 kb/s
+Encoded date          : UTC 2018-09-30 07:56:38
+Tagged date           : UTC 2018-09-30 07:56:38
+FileExtension_Invalid : mov mp4 m4v m4a m4b m4p 3ga 3gpa 3gpp 3gp 3gpp2 3g2 k3g jpm jpx mqv ismv isma ismt f4a f4b f4v
+
+Audio
+ID                    : 2
+Format                : AAC LC
+Format/Info           : Advanced Audio Codec Low Complexity
+Format profile        : AAC@L2
+Codec ID              : mp4a-40-2
+Duration              : 58 s 565 ms
+Duration_FirstFrame   : 5 ms
+Bit rate mode         : Variable
+Bit rate              : 256 kb/s
+Nominal bit rate      : 827 b/s
+Maximum bit rate      : 262 kb/s
+Channel(s)            : 2 channels
+Channel layout        : L R
+Sampling rate         : 48.0 kHz
+Frame rate            : 46.875 FPS (1024 SPF)
+Compression mode      : Lossy
+Stream size           : 1.79 MiB (99%)
+Encoded date          : UTC 2018-09-30 07:56:38
+Tagged date           : UTC 2018-09-30 07:56:38
+
+--------------------------- AviSynth Script ---------------------------
+
+LoadPlugin("E:\N.I.B.B.A.S\StaxRip 1.9.0.0\Apps\Plugins\avs\L-SMASH-Works\LSMASHSource.dll")
+LSMASHVideoSource("E:\N.I.B.B.A.S\20170825_100649.mp4", format = "YUV420P8")
+
+-------------------------- Script Properties --------------------------
+
+Source Frame Count : 1759
+Source Frame Rate  : 30.041322
+Source Duration    : 00:00:58.5530000
+Target Frame Count : 1759
+Target Frame Rate  : 30.041322
+Target Duration    : 00:00:58.5530000
+
+---------------- Video encoding x265 using ffmpeg 4.0.2 ----------------
+
+"E:\N.I.B.B.A.S\StaxRip 1.9.0.0\Apps\ffmpeg\ffmpeg.exe" -i E:\N.I.B.B.A.S\20170825_100649_temp\20170825_100649_fast_25.avs -c:v libx265 -preset fast -crf 25 -an -y -hide_banner E:\N.I.B.B.A.S\20170825_100649_temp\20170825_100649_fast_25_out.mkv
+
+Input #0, avisynth, from 'E:\N.I.B.B.A.S\20170825_100649_temp\20170825_100649_fast_25.avs':
+Duration: 00:00:58.55, start: 0.000000, bitrate: 0 kb/s
+Stream #0:0: Video: rawvideo (I420 / 0x30323449), yuv420p, 1920x1080, 30.04 fps, 30.04 tbr, 30.04 tbn, 30.04 tbc
+Stream mapping:
+Stream #0:0 -> #0:0 (rawvideo (native) -> hevc (libx265))
+Press [q] to stop, [?] for help
+x265 [info]: HEVC encoder version 2.8+54-79c76e42cb28
+x265 [info]: build info [Windows][GCC 7.3.1][64 bit] 8bit+10bit
+x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+x265 [info]: Main profile, Level-4 (Main tier)
+x265 [info]: Thread pool created using 4 threads
+x265 [info]: Slices                              : 1
+x265 [info]: frame threads / pool features       : 2 / wpp(17 rows)
+x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
+x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
+x265 [info]: ME / range / subpel / merge         : hex / 57 / 2 / 2
+x265 [info]: Keyframe min / max / scenecut / bias: 25 / 250 / 40 / 5.00
+x265 [info]: Lookahead / bframes / badapt        : 15 / 4 / 0
+x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
+x265 [info]: References / ref-limit  cu / depth  : 3 / on / on
+x265 [info]: AQ: mode / str / qg-size / cu-tree  : 1 / 1.0 / 32 / 1
+x265 [info]: Rate Control / qCompress            : CRF-25.0 / 0.60
+x265 [info]: tools: rd=2 psy-rd=2.00 rskip signhide tmvp fast-intra
+x265 [info]: tools: strong-intra-smoothing lslices=6 deblock sao
+Output #0, matroska, to 'E:\N.I.B.B.A.S\20170825_100649_temp\20170825_100649_fast_25_out.mkv':
+Metadata:
+encoder         : Lavf58.12.100
+Stream #0:0: Video: hevc (libx265), yuv420p, 1920x1080, q=2-31, 30.04 fps, 1k tbn, 30.04 tbc
+Metadata:
+encoder         : Lavc58.18.100 libx265
+video:43114kB audio:0kB subtitle:0kB other streams:0kB global headers:2kB muxing overhead: 0.037204%
+x265 [info]: frame I:      8, Avg QP:26.13  kb/s: 33999.45
+x265 [info]: frame P:    345, Avg QP:27.76  kb/s: 16486.88
+x265 [info]: frame B:   1406, Avg QP:33.02  kb/s: 3306.32
+x265 [info]: Weighted P-Frames: Y:28.7% UV:23.2%
+x265 [info]: consecutive B-frames: 0.3% 0.0% 0.3% 0.0% 99.4%
+encoded 1759 frames in 130.08s (13.52 fps), 6031.07 kb/s, Avg QP:31.95
+
+Start:    06:21:21 PM
+End:      06:23:31 PM
+Duration: 00:02:10
+
+General
+Complete name        : E:\N.I.B.B.A.S\20170825_100649_temp\20170825_100649_fast_25_out.mkv
+Format               : Matroska
+Format version       : Version 4
+File size            : 42.1 MiB
+Duration             : 58 s 552 ms
+Overall bit rate     : 6 034 kb/s
+Writing application  : Lavf58.12.100
+Writing library      : Lavf58.12.100
+ErrorDetectionType   : Per level 1
+
+Video
+ID                   : 1
+Format               : HEVC
+Format/Info          : High Efficiency Video Coding
+Format profile       : Main@L4@Main
+Codec ID             : V_MPEGH/ISO/HEVC
+Duration             : 58 s 552 ms
+Bit rate             : 5 914 kb/s
+Width                : 1 920 pixels
+Height               : 1 080 pixels
+Display aspect ratio : 16:9
+Frame rate mode      : Constant
+Frame rate           : 30.041 FPS
+Color space          : YUV
+Chroma subsampling   : 4:2:0
+Bit depth            : 8 bits
+Bits/(Pixel*Frame)   : 0.095
+Stream size          : 41.3 MiB (98%)
+Writing library      : x265 2.8+54-79c76e42cb28:[Windows][GCC 7.3.1][64 bit] 8bit+10bit
+Default              : Yes
+Forced               : No
+
+--------------------- Muxing using mkvmerge 26.0.0 ---------------------
+
+"E:\N.I.B.B.A.S\StaxRip 1.9.0.0\Apps\MKVToolNix\mkvmerge.exe" -o E:\N.I.B.B.A.S\20170825_100649_fast_25.mkv --no-audio --no-subs --no-chapters --no-attachments --no-track-tags --no-global-tags E:\N.I.B.B.A.S\20170825_100649_temp\20170825_100649_fast_25_out.mkv --global-tags E:\N.I.B.B.A.S\20170825_100649_temp\20170825_100649_fast_25_tags.xml --ui-language en
+
+mkvmerge v26.0.0 ('In The Game') 64-bit
+'E:\N.I.B.B.A.S\20170825_100649_temp\20170825_100649_fast_25_out.mkv': Using the demultiplexer for the format 'Matroska'.
+'E:\N.I.B.B.A.S\20170825_100649_temp\20170825_100649_fast_25_out.mkv' track 0: Using the output module for the format 'HEVC/h.265'.
+The file 'E:\N.I.B.B.A.S\20170825_100649_fast_25.mkv' has been opened for writing.
+The cue entries (the index) are being written...
+Multiplexing took 0 seconds.
+
+Start:    06:23:31 PM
+End:      06:23:32 PM
+Duration: 00:00:00
+
+General
+Complete name        : E:\N.I.B.B.A.S\20170825_100649_fast_25.mkv
+Format               : Matroska
+Format version       : Version 4
+File size            : 42.1 MiB
+Duration             : 58 s 552 ms
+Overall bit rate     : 6 035 kb/s
+Encoded date         : UTC 2018-09-30 12:53:31
+Writing application  : mkvmerge v26.0.0 ('In The Game') 64-bit
+Writing library      : libebml v1.3.6 + libmatroska v1.4.9
+Writing frontend     : StaxRip v1.9.0.0
+
+Video
+ID                   : 1
+Format               : HEVC
+Format/Info          : High Efficiency Video Coding
+Format profile       : Main@L4@Main
+Codec ID             : V_MPEGH/ISO/HEVC
+Duration             : 58 s 552 ms
+Bit rate             : 6 032 kb/s
+Width                : 1 920 pixels
+Height               : 1 080 pixels
+Display aspect ratio : 16:9
+Frame rate mode      : Constant
+Frame rate           : 30.042 FPS
+Original frame rate  : 30.041 FPS
+Color space          : YUV
+Chroma subsampling   : 4:2:0
+Bit depth            : 8 bits
+Bits/(Pixel*Frame)   : 0.097
+Stream size          : 42.1 MiB (100%)
+Writing library      : x265 2.8+54-79c76e42cb28:[Windows][GCC 7.3.1][64 bit] 8bit+10bit
+Default              : Yes
+Forced               : No
+
+----------------------------- Job Complete -----------------------------
+
+Start:    06:21:20 PM
+End:      06:23:32 PM
+Duration: 00:02:11
+
