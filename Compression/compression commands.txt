@@ -1,0 +1,5 @@
+"E:\N.I.B.B.A.S\StaxRip 1.9.0.0\Apps\ffmpeg\ffmpeg.exe" -i "E:\New folder\WhatsApp Video.mp4" -vn -acodec copy "E:\New folder\outputaudio.mka"
+
+"E:\N.I.B.B.A.S\StaxRip 1.9.0.0\Apps\ffmpeg\ffmpeg.exe" -i "E:\New folder\WhatsApp Video_temp\WhatsApp Video.avs" -c:v libx265 -preset faster -crf 25 -an -y -hide_banner "E:\New folder\WhatsApp Video_out.mkv"
+
+"E:\N.I.B.B.A.S\StaxRip 1.9.0.0\Apps\MKVToolNix\mkvmerge.exe" -o "E:\New folder\WhatsApp Video med out manual.mkv" "E:\New folder\WhatsApp Video_out.mkv" --audio-tracks 0 --language 0:eng --default-track 0:0 --forced-track 0:0 "E:\New folder\outputaudio.mka" --ui-language en
