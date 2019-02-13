@@ -10,6 +10,23 @@ searchlines = f.readlines()
 f.close()
 
 for line in searchlines:
+    if "Complete name" in line: 
+        ro=line
+        break
+
+flag=0
+name=""
+ro=ro.replace(" ", "")
+ro = ro.strip('\n')
+for i in ro:
+    if i is ":":
+        flag=1
+        continue
+    if flag is 1:
+        name+=i
+print(name)
+
+for line in searchlines:
     if "Bit rate" in line: 
         r=line
         break
@@ -257,7 +274,7 @@ tduration=get_sec(tduration)
 print(tduration)
 import csv
 
-csvData = [['videobitrate','width','height','duration','framerate','streamsize','compressedvideobitrate','compressedvideostreamsize','compressionduration',], [vbitrate,width,height,duration,framerate,streamsize,cvbitrate,cstreamsize,tduration,]]
+csvData = [['name','videobitrate','width','height','duration','framerate','streamsize','compressedvideobitrate','compressedvideostreamsize','compressionduration',], [name,vbitrate,width,height,duration,framerate,streamsize,cvbitrate,cstreamsize,tduration,]]
 
 with open('main.csv', 'w') as csvFile:
     writer = csv.writer(csvFile)
