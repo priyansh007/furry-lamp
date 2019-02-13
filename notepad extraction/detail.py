@@ -22,7 +22,7 @@ for line in searchlines:
         r2=line
         break
 for line in searchlines:
-    if "Duration" in line: 
+    if "mdhd_Duration" in line: 
         r3=line
         break
 c=0
@@ -108,22 +108,24 @@ print(height)
 
 flag=0
 duration=""
+
 for i in r3:
     if i is ":":
         flag=1
+        
         continue
     if flag is 1:
         duration+=i
-    if i is "s":
+    if i is int:
         break
 
-dur=duration.replace(" ", "")
-duration=''
-for i in dur:
-    if i is 's':
-        break
-    duration+=i
-duration=int(duration)        
+duration=duration.replace(" ", "")
+
+
+duration=int(duration)  
+m=duration/100000
+s=duration/1000
+duration=int(m)*60+int(s)      
 print(duration)
 
 

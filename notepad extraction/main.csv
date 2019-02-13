@@ -1,8 +1,2 @@
-videobitrate,width,height,duration,framerate,streamsize,compressedvideobitrate,compressedvideostreamsize,compressionduration
-,,,,,,,,
-17408,1920,1080,58,30.041,121856,5914,42291.2,131
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,ok,,,
+videobitrate,width,height,duration,framerate,streamsize,compressedvideobitrate,compressedvideostreamsize,compressionduration
+17408.0,1920,1080,58,30.041,121856.0,5914.0,42291.2,131
