@@ -10,6 +10,17 @@ from os.path import isfile, join
 mypath = "F:/project/compression details/"
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 print(onlyfiles)
+
+import csv
+    
+csvData = [['filename','name','videobitrate','width','height','duration','framerate','streamsize','compressedvideobitrate','compressedvideostreamsize','compressionduration']]
+    
+with open('main.csv', 'w') as csvFile:
+    writer = csv.writer(csvFile)
+    writer.writerows(csvData)
+    
+csvFile.close()
+
 for video_name in onlyfiles:
     f = open(mypath+video_name, "r")
     searchlines = f.readlines()
@@ -274,13 +285,10 @@ for video_name in onlyfiles:
     
     tduration=get_sec(tduration)
     print(tduration)
-    import csv
-    
-    csvData = [['filename','name','videobitrate','width','height','duration','framerate','streamsize','compressedvideobitrate','compressedvideostreamsize','compressionduration',], [logname,name,vbitrate,width,height,duration,framerate,streamsize,cvbitrate,cstreamsize,tduration,]]
-    
-    with open('main.csv', 'w') as csvFile:
+    row=[logname,name,vbitrate,width,height,duration,framerate,streamsize,cvbitrate,cstreamsize,tduration]
+    with open('main.csv', 'a') as csvFile:
         writer = csv.writer(csvFile)
-        writer.writerows(csvData)
-    
+        writer.writerow(row)
+
     csvFile.close()
     
