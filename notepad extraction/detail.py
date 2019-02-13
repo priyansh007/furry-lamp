@@ -15,7 +15,7 @@ import csv
     
 csvData = [['filename','videoname','videobitrate','width','height','duration','framerate','streamsize','compressedvideobitrate','compressedvideostreamsize','compressionduration']]
     
-with open('main.csv', 'w') as csvFile:
+with open('main.csv', 'w', newline='') as csvFile:
     writer = csv.writer(csvFile)
     writer.writerows(csvData)
     
@@ -286,7 +286,7 @@ for video_name in onlyfiles:
     tduration=get_sec(tduration)
     print(tduration)
     row=[logname,name,vbitrate,width,height,duration,framerate,streamsize,cvbitrate,cstreamsize,tduration]
-    with open('main.csv', 'a') as csvFile:
+    with open('main.csv', 'a', newline='') as csvFile:
         writer = csv.writer(csvFile)
         writer.writerow(row)
 
