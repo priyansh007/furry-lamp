@@ -7,14 +7,14 @@ Created on Thu Feb  7 14:04:12 2019
 
 from os import listdir
 from os.path import isfile, join
-mypath = "F:\project\compression details"
+mypath = "F:/project/compression details/"
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 print(onlyfiles)
 for video_name in onlyfiles:
-    f = open(video_name, "r")
+    f = open(mypath+video_name, "r")
     searchlines = f.readlines()
     f.close()
-    
+    logname=video_name
     for line in searchlines:
         if "Complete name" in line: 
             ro=line
@@ -276,7 +276,7 @@ for video_name in onlyfiles:
     print(tduration)
     import csv
     
-    csvData = [['name','videobitrate','width','height','duration','framerate','streamsize','compressedvideobitrate','compressedvideostreamsize','compressionduration',], [name,vbitrate,width,height,duration,framerate,streamsize,cvbitrate,cstreamsize,tduration,]]
+    csvData = [['filename','name','videobitrate','width','height','duration','framerate','streamsize','compressedvideobitrate','compressedvideostreamsize','compressionduration',], [logname,name,vbitrate,width,height,duration,framerate,streamsize,cvbitrate,cstreamsize,tduration,]]
     
     with open('main.csv', 'w') as csvFile:
         writer = csv.writer(csvFile)

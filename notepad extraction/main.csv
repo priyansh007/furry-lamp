@@ -1,2 +1,2 @@
-name,videobitrate,width,height,duration,framerate,streamsize,compressedvideobitrate,compressedvideostreamsize,compressionduration
-E\N.I.B.B.A.S\20170825_100649.mp4,17408.0,1920,1080,58,30.041,121856.0,5914.0,42291.2,131
+filename,name,videobitrate,width,height,duration,framerate,streamsize,compressedvideobitrate,compressedvideostreamsize,compressionduration
+20170825_100649_veryslow_staxrip.log,E\N.I.B.B.A.S\20170825_100649.mp4,17408.0,1920,1080,58,30.041,121856.0,4810.0,34406.4,1767
