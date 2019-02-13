@@ -13,7 +13,7 @@ print(onlyfiles)
 
 import csv
     
-csvData = [['filename','name','videobitrate','width','height','duration','framerate','streamsize','compressedvideobitrate','compressedvideostreamsize','compressionduration']]
+csvData = [['filename','videoname','videobitrate','width','height','duration','framerate','streamsize','compressedvideobitrate','compressedvideostreamsize','compressionduration']]
     
 with open('main.csv', 'w') as csvFile:
     writer = csv.writer(csvFile)

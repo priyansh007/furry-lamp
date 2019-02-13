@@ -1,4 +1,4 @@
-filename,name,videobitrate,width,height,duration,framerate,streamsize,compressedvideobitrate,compressedvideostreamsize,compressionduration
+filename,videoname,videobitrate,width,height,duration,framerate,streamsize,compressedvideobitrate,compressedvideostreamsize,compressionduration
 20170825_100649_faster_25_staxrip.log,E\N.I.B.B.A.S\20170825_100649.mp4,17408.0,1920,1080,58,30.041,121856.0,5846.0,41779.2,106
 20170825_100649_faster_staxrip.log,E\N.I.B.B.A.S\20170825_100649.mp4,17408.0,1920,1080,58,30.041,121856.0,3749.0,26828.8,98
 20170825_100649_fast_25_staxrip.log,E\N.I.B.B.A.S\20170825_100649.mp4,17408.0,1920,1080,58,30.041,121856.0,5914.0,42291.2,131
