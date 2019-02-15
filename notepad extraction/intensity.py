@@ -47,9 +47,13 @@ while(1):
             cv2.imwrite("asd.jpg", frame)
     else :
         break
+
+averag=sum(similarity) / float(len(similarity))
+final_averag=(averag/max(similarity))*100
+print(final_averag)
     
-for i in range(0,len(similarity)):
-    print(similarity[i])
+#for i in range(0,len(similarity)):
+#    print(similarity[i])
 
 cap.release()
 cv2.destroyAllWindows()
