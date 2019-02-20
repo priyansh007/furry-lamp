@@ -6,11 +6,17 @@ from os import listdir
 from os.path import isfile, join
 import csv
 from Output_Video_Name import output_video
+import pandas as pd
 
-mypath = "./Videos/"
+
+# mypath = "./Videos/"
+mypath = "D:/Academics/Sem-7(2018-19)/Project/Feature Extraction/Videos/"
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 print(onlyfiles)
 video_count = 1
+
+presets = ['superfast', 'veryfast', 'faster', 'fast', 'medium', 'slow', 'slower']
+df_for_current_video = pd.DataFrame(columns=['Video Name','Frames per Second','Total No. of Scenes','Avg Motion %','Avg PCC','Preset Name'])
 
 def feature_extr(video_name,video_count):
     print("Video Name is "+video_name)
@@ -118,6 +124,14 @@ def feature_extr(video_name,video_count):
 
     avg_pcc_rounded = str(round(avg_pcc,3))+" %"
     print ("\n\nAverage PCC for video = "+avg_pcc_rounded)
+    
+    #df_for_current_video.loc[len(df_for_current_video)] = [video_name, str(fps), str(len(scene)), avg_mp_rounded, avg_pcc_rounded, "Faster"]
+    
+    # Append features to dataframe for all 7 presets
+    for p in presets:
+        df_for_current_video.loc[len(df_for_current_video)] = [video_name, str(fps), str(len(scene)), avg_mp_rounded, avg_pcc_rounded, p]
+    
+    # print(df_for_current_video)
     
     # Write features to CSV file
     with open('video_features.csv', mode='a') as csv_file:
