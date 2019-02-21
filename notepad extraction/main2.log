@@ -1,0 +1,96 @@
+﻿Input #0, avisynth, from 'E:\New folder\AVS\WhatsApp Video_avs.avs':
+  Duration: 00:02:02.60, start: 0.000000, bitrate: 0 kb/s
+    Stream #0:0: Video: rawvideo (I420 / 0x30323449), yuv420p, 720x1280, 15.11 fps, 15.11 tbr, 15.11 tbn, 15.11 tbc
+Stream mapping:
+  Stream #0:0 -> #0:0 (rawvideo (native) -> hevc (libx265))
+Press [q] to stop, [?] for help
+x265 [info]: HEVC encoder version 2.8+54-79c76e42cb28
+x265 [info]: build info [Windows][GCC 7.3.1][64 bit] 8bit+10bit
+x265 [info]: using cpu capabilities: MMX2 SSE2Fast LZCNT SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+x265 [info]: Main profile, Level-3.1 (Main tier)
+x265 [info]: Thread pool created using 4 threads
+x265 [info]: Slices                              : 1
+x265 [info]: frame threads / pool features       : 2 / wpp(20 rows)
+x265 [info]: Coding QT: max CU size, min CU size : 64 / 8
+x265 [info]: Residual QT: max TU size, max depth : 32 / 1 inter / 1 intra
+x265 [info]: ME / range / subpel / merge         : hex / 57 / 1 / 2
+x265 [info]: Keyframe min / max / scenecut / bias: 15 / 250 / 40 / 5.00
+x265 [info]: Lookahead / bframes / badapt        : 15 / 4 / 0
+x265 [info]: b-pyramid / weightp / weightb       : 1 / 1 / 0
+x265 [info]: References / ref-limit  cu / depth  : 2 / on / on
+x265 [info]: AQ: mode / str / qg-size / cu-tree  : 1 / 0.0 / 32 / 1
+x265 [info]: Rate Control / qCompress            : CRF-28.0 / 0.60
+x265 [info]: tools: rd=2 early-skip rskip signhide tmvp fast-intra
+x265 [info]: tools: strong-intra-smoothing lslices=8 deblock sao
+Output #0, matroska, to 'E:\New folder\Intermediate\WhatsApp Video_intermediateVideo_veryfast.mkv':
+  Metadata:
+    encoder         : Lavf58.12.100
+    Stream #0:0: Video: hevc (libx265), yuv420p, 720x1280, q=2-31, 15.11 fps, 1k tbn, 15.11 tbc
+    Metadata:
+      encoder         : Lavc58.18.100 libx265
+frame=   46 fps=0.0 q=-0.0 size=       3kB time=00:00:01.32 bitrate=  16.8kbits/s speed=2.51x    
+frame=   77 fps= 75 q=-0.0 size=       3kB time=00:00:03.37 bitrate=   6.6kbits/s speed=3.27x    
+frame=  105 fps= 67 q=-0.0 size=     217kB time=00:00:05.22 bitrate= 339.9kbits/s speed=3.34x    
+frame=  137 fps= 66 q=-0.0 size=     217kB time=00:00:07.34 bitrate= 241.9kbits/s speed=3.54x    
+frame=  168 fps= 65 q=-0.0 size=     217kB time=00:00:09.39 bitrate= 189.1kbits/s speed=3.64x    
+frame=  200 fps= 65 q=-0.0 size=     423kB time=00:00:11.51 bitrate= 301.0kbits/s speed=3.73x    
+frame=  230 fps= 64 q=-0.0 size=     423kB time=00:00:13.49 bitrate= 256.7kbits/s speed=3.75x    
+frame=  260 fps= 63 q=-0.0 size=     641kB time=00:00:15.48 bitrate= 339.2kbits/s speed=3.76x    
+frame=  290 fps= 63 q=-0.0 size=     665kB time=00:00:17.46 bitrate= 311.9kbits/s speed=3.78x    
+frame=  325 fps= 63 q=-0.0 size=     665kB time=00:00:19.78 bitrate= 275.4kbits/s speed=3.85x    
+frame=  360 fps= 64 q=-0.0 size=     853kB time=00:00:22.09 bitrate= 316.2kbits/s speed= 3.9x    
+frame=  393 fps= 64 q=-0.0 size=     853kB time=00:00:24.28 bitrate= 287.8kbits/s speed=3.94x    
+frame=  429 fps= 64 q=-0.0 size=     853kB time=00:00:26.66 bitrate= 262.1kbits/s speed=   4x    
+frame=  462 fps= 64 q=-0.0 size=    1032kB time=00:00:28.84 bitrate= 293.0kbits/s speed=4.03x    
+frame=  496 fps= 64 q=-0.0 size=    1032kB time=00:00:31.09 bitrate= 271.8kbits/s speed=4.04x    
+frame=  525 fps= 64 q=-0.0 size=    1237kB time=00:00:33.01 bitrate= 306.8kbits/s speed=4.03x    
+frame=  558 fps= 64 q=-0.0 size=    1237kB time=00:00:35.19 bitrate= 287.8kbits/s speed=4.04x    
+frame=  593 fps= 64 q=-0.0 size=    1237kB time=00:00:37.51 bitrate= 270.0kbits/s speed=4.07x    
+frame=  629 fps= 65 q=-0.0 size=    1434kB time=00:00:39.89 bitrate= 294.4kbits/s speed= 4.1x    
+frame=  663 fps= 65 q=-0.0 size=    1434kB time=00:00:42.14 bitrate= 278.7kbits/s speed=4.11x    
+frame=  695 fps= 65 q=-0.0 size=    1611kB time=00:00:44.26 bitrate= 298.2kbits/s speed=4.12x    
+frame=  732 fps= 65 q=-0.0 size=    1611kB time=00:00:46.71 bitrate= 282.6kbits/s speed=4.15x    
+frame=  768 fps= 65 q=-0.0 size=    1777kB time=00:00:49.09 bitrate= 296.5kbits/s speed=4.17x    
+frame=  798 fps= 65 q=-0.0 size=    1797kB time=00:00:51.07 bitrate= 288.1kbits/s speed=4.17x    
+frame=  834 fps= 65 q=-0.0 size=    1797kB time=00:00:53.46 bitrate= 275.3kbits/s speed=4.19x    
+frame=  865 fps= 65 q=-0.0 size=    1964kB time=00:00:55.51 bitrate= 289.9kbits/s speed=4.18x    
+frame=  899 fps= 65 q=-0.0 size=    1964kB time=00:00:57.76 bitrate= 278.6kbits/s speed=4.19x    
+frame=  931 fps= 65 q=-0.0 size=    2129kB time=00:00:59.87 bitrate= 291.2kbits/s speed=4.19x    
+frame=  968 fps= 65 q=-0.0 size=    2129kB time=00:01:02.32 bitrate= 279.8kbits/s speed=4.21x    
+frame= 1003 fps= 66 q=-0.0 size=    2129kB time=00:01:04.64 bitrate= 269.7kbits/s speed=4.22x    
+frame= 1039 fps= 66 q=-0.0 size=    2276kB time=00:01:07.02 bitrate= 278.2kbits/s speed=4.24x    
+frame= 1072 fps= 66 q=-0.0 size=    2276kB time=00:01:09.20 bitrate= 269.5kbits/s speed=4.24x    
+frame= 1106 fps= 66 q=-0.0 size=    2426kB time=00:01:11.45 bitrate= 278.1kbits/s speed=4.25x    
+frame= 1140 fps= 66 q=-0.0 size=    2426kB time=00:01:13.70 bitrate= 269.6kbits/s speed=4.25x    
+frame= 1170 fps= 66 q=-0.0 size=    2426kB time=00:01:15.69 bitrate= 262.6kbits/s speed=4.24x    
+frame= 1207 fps= 66 q=-0.0 size=    2568kB time=00:01:18.13 bitrate= 269.2kbits/s speed=4.25x    
+frame= 1235 fps= 65 q=-0.0 size=    2568kB time=00:01:19.99 bitrate= 263.0kbits/s speed=4.19x    
+frame= 1266 fps= 64 q=-0.0 size=    2696kB time=00:01:22.04 bitrate= 269.2kbits/s speed=4.18x    
+frame= 1297 fps= 64 q=-0.0 size=    2710kB time=00:01:24.09 bitrate= 264.0kbits/s speed=4.18x    
+frame= 1328 fps= 64 q=-0.0 size=    2710kB time=00:01:26.14 bitrate= 257.8kbits/s speed=4.17x    
+frame= 1368 fps= 65 q=-0.0 size=    2840kB time=00:01:28.79 bitrate= 262.0kbits/s speed= 4.2x    
+frame= 1401 fps= 65 q=-0.0 size=    2840kB time=00:01:30.97 bitrate= 255.8kbits/s speed= 4.2x    
+frame= 1434 fps= 65 q=-0.0 size=    2970kB time=00:01:33.15 bitrate= 261.2kbits/s speed= 4.2x    
+frame= 1462 fps= 64 q=-0.0 size=    2970kB time=00:01:35.00 bitrate= 256.1kbits/s speed=4.19x    
+frame= 1494 fps= 64 q=-0.0 size=    2970kB time=00:01:37.12 bitrate= 250.5kbits/s speed=4.19x    
+frame= 1523 fps= 64 q=-0.0 size=    3151kB time=00:01:39.04 bitrate= 260.6kbits/s speed=4.18x    
+frame= 1552 fps= 64 q=-0.0 size=    3151kB time=00:01:40.96 bitrate= 255.7kbits/s speed=4.17x    
+frame= 1580 fps= 64 q=-0.0 size=    3151kB time=00:01:42.81 bitrate= 251.1kbits/s speed=4.16x    
+frame= 1609 fps= 64 q=-0.0 size=    3310kB time=00:01:44.73 bitrate= 258.9kbits/s speed=4.14x    
+frame= 1636 fps= 63 q=-0.0 size=    3310kB time=00:01:46.52 bitrate= 254.6kbits/s speed=4.13x    
+frame= 1665 fps= 63 q=-0.0 size=    3468kB time=00:01:48.44 bitrate= 262.0kbits/s speed=4.12x    
+frame= 1693 fps= 63 q=-0.0 size=    3488kB time=00:01:50.29 bitrate= 259.0kbits/s speed=4.12x    
+frame= 1726 fps= 63 q=-0.0 size=    3488kB time=00:01:52.47 bitrate= 254.0kbits/s speed=4.12x    
+frame= 1755 fps= 63 q=-0.0 size=    3665kB time=00:01:54.39 bitrate= 262.4kbits/s speed=4.11x    
+frame= 1786 fps= 63 q=-0.0 size=    3665kB time=00:01:56.44 bitrate= 257.8kbits/s speed=4.11x    
+frame= 1818 fps= 63 q=-0.0 size=    3665kB time=00:01:58.56 bitrate= 253.2kbits/s speed=4.11x    
+frame= 1847 fps= 63 q=-0.0 size=    3856kB time=00:02:00.48 bitrate= 262.2kbits/s speed= 4.1x    
+frame= 1853 fps= 62 q=-0.0 Lsize=    3962kB time=00:02:02.40 bitrate= 265.2kbits/s speed=4.11x    
+video:3946kB audio:0kB subtitle:0kB other streams:0kB global headers:2kB muxing overhead: 0.410188%
+x265 [info]: frame I:      8, Avg QP:27.65  kb/s: 1612.51 
+x265 [info]: frame P:    365, Avg QP:28.87  kb/s: 776.30  
+x265 [info]: frame B:   1480, Avg QP:33.75  kb/s: 129.34  
+x265 [info]: Weighted P-Frames: Y:0.8% UV:0.0%
+x265 [info]: consecutive B-frames: 0.5% 0.3% 0.0% 0.3% 98.9% 
+
+encoded 1853 frames in 29.80s (62.18 fps), 263.18 kb/s, Avg QP:32.76
