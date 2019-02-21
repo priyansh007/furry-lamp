@@ -6,6 +6,13 @@ from os import listdir
 from os.path import isfile, join
 import pandas as pd
 
+
+video_folder = "D:/Academics/Sem-7(2018-19)/Project/Feature Extraction/Videos/"
+video_list = [f for f in listdir(video_folder) if isfile(join(video_folder, f))]
+
+presets = ['superfast', 'veryfast', 'faster', 'fast', 'medium', 'slow', 'slower']
+df_for_current_video = pd.DataFrame(columns=['Video Name','Frames per Second','Total No. of Scenes','Avg Motion %','Avg PCC','Avg Intensity','Preset Name'])
+
 def feature_extr(video_name):
     cap = cv2.VideoCapture(video_name)
     fgbg = cv2.createBackgroundSubtractorMOG2()
@@ -21,6 +28,7 @@ def feature_extr(video_name):
     sum_pcc = 0
     min_mp = 80
     flag = 0
+    similarity=[]
 
     number=fps*0.1
     num=ceil(number)
@@ -42,13 +50,29 @@ def feature_extr(video_name):
             white_count = cv2.countNonZero(imS2)
             white_ratio = white_count/4800
 
-            # Pearson Correlation Coefficient
             if cv2.imread("temp.jpg") is not None:
                 old_frame = cv2.imread("temp.jpg")
+
+                # Pearson Correlation Coefficient
                 a1 = np.array(old_frame)
                 a2 = np.array(frame)
                 if a1.shape == a2.shape:
                     corr, p_value = pearsonr(a1.flatten(),a2.flatten() )
+
+                # Intensity
+                sift = cv2.xfeatures2d.SIFT_create()
+                kp_1, desc_1 = sift.detectAndCompute(old_frame, None)
+                kp_2, desc_2 = sift.detectAndCompute(frame, None)
+                index_params = dict(algorithm=0, trees=5)
+                search_params = dict()
+                flann = cv2.FlannBasedMatcher(index_params, search_params)
+                matches = flann.knnMatch(desc_1, desc_2, k=2)
+                good_points=[]
+                ratio = 0.6
+                for m, n in matches:
+                    if m.distance < ratio*n.distance:
+                        good_points.append(m)
+                similarity.append(len(good_points))
 
             cv2.imwrite("temp.jpg", frame)
 
@@ -99,9 +123,20 @@ def feature_extr(video_name):
     avg_mp_rounded = str(round(avg_mp,3))+" %"
     avg_pcc_rounded = str(round(avg_pcc,3))+" %"
 
-    # Append features to dataframe for all 7 presets
+    # Frame by Frame Intensity comparison
+    avg_intensity=sum(similarity) / float(len(similarity))
+    final_avg_intensity=(avg_intensity/max(similarity))*100
+
     for p in presets:
-        df_for_current_video.loc[len(df_for_current_video)] = [video_name, str(fps), str(len(scene)), avg_mp_rounded, avg_pcc_rounded, p]
+        df_for_current_video.loc[len(df_for_current_video)] = [video_name, str(fps), str(len(scene)), avg_mp_rounded, avg_pcc_rounded, final_avg_intensity, p]
 
     cap.release()
     cv2.destroyAllWindows()
+
+    # Append features to dataframe for all 7 presets
+    # return [video_name, str(fps), str(len(scene)), avg_mp_rounded, avg_pcc_rounded, final_avg_intensity]
+
+
+# Extract Features from Every Video
+for video_name in video_list:
+    feature_extr(video_folder+video_name)
