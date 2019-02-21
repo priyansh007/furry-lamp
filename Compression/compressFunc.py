@@ -52,6 +52,8 @@ def compressdis(corePath, inputVideo, presetName):
     file.write(merger)
     file.write("\n")
     file.close()
-    os.system('start cmd /K' + '"' + bat + '"')
+    os.system('"' + bat + '"')
 
-compressdis('E:\\New folder', 'WhatsApp Video.mp4', 'slower')
+compressdis('E:\\New folder', 'WhatsApp Video.mp4', 'medium')
+compressdis('E:\\New folder', 'WhatsApp Video.mp4', 'faster')
+compressdis('E:\\New folder', 'WhatsApp Video.mp4', 'superfast')
