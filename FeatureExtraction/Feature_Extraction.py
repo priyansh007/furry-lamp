@@ -6,13 +6,6 @@ from os import listdir
 from os.path import isfile, join
 import pandas as pd
 
-
-video_folder = "D:/Academics/Sem-7(2018-19)/Project/Feature Extraction/Videos/"
-video_list = [f for f in listdir(video_folder) if isfile(join(video_folder, f))]
-
-presets = ['superfast', 'veryfast', 'faster', 'fast', 'medium', 'slow', 'slower']
-df_for_current_video = pd.DataFrame(columns=['Video Name','Frames per Second','Total No. of Scenes','Avg Motion %','Avg PCC','Preset Name'])
-
 def feature_extr(video_name):
     cap = cv2.VideoCapture(video_name)
     fgbg = cv2.createBackgroundSubtractorMOG2()
@@ -112,7 +105,3 @@ def feature_extr(video_name):
 
     cap.release()
     cv2.destroyAllWindows()
-
-# Extract Features from Every Video
-for video_name in video_list:
-    feature_extr(video_folder+video_name)
