@@ -10,7 +10,7 @@ def feature_extr(video_name):
     cap = cv2.VideoCapture(video_name)
     fgbg = cv2.createBackgroundSubtractorMOG2()
     fps = cap.get(cv2.CAP_PROP_FPS)
-
+    similarity=[]
     looper,image=cap.read()
 
     # Scene change
