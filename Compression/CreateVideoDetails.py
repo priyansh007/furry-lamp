@@ -6,7 +6,7 @@ def generateDetailsName(corePath, inputVideoName):
     return stat
 
 def CreateVideoDetail(corePath, inputVideoName, mediaInfo):
-    video = corePath + "\\Input\\" + inputVideoName
+    VideoPath = corePath + "\\Input\\" + inputVideoName
     details = generateDetailsName(corePath, inputVideoName)
     os.chdir(mediaInfo)
     os.getcwd()
