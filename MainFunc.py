@@ -1,7 +1,7 @@
 import pandas as pd
 from os import listdir
 from os.path import isfile, join
-from Compression import compressFunc,CreateVideoDetails
+from Compression import compressFunc,CreateVideoDetails,vqmt
 from FeatureExtraction import Feature_Extraction
 from pathlib import Path, PureWindowsPath
 
@@ -23,3 +23,4 @@ for video in videoFileList:
     CreateVideoDetails.CreateVideoDetail(corePath, video, mediaInfo)
     CreateVideoDetails.CreateCompVideoDetail(corePath, video, mediaInfo)
     CreateVideoDetails.retrieveCompressionDetail(corePath, video)
+    vqmt.videoQualityMeasure(corePath, video, compressedVideo, width, height, frames, ffmpeg, vqmt)
