@@ -26,6 +26,8 @@ def CreateCompVideoDetail(corePath, inputVideoName, mediaInfo):
     videoname=inputVideoName.split('.')[0]       #video name without extenssion
     mypath = corePath + "\\Compressed\\"+videoname   # path to compressed videos
     onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+
+    
     for video_name in onlyfiles:
         os.chdir(mediaInfo)
         os.getcwd()
@@ -47,3 +49,40 @@ def CreateCompVideoDetail(corePath, inputVideoName, mediaInfo):
         format = subprocess.check_output('MediaInfo.exe --Inform="General;format=%Format%" "$@" ' + VideoPath,
                                          shell=True).decode('utf-8')
         #print(name)
+def CreateCompressionDetail(corePath, inputVideoName):
+    videoname=inputVideoName.split('.')[0]       #video name without extenssion
+    mypath = corePath + "\\Compressed\\"+videoname   # path to compressed videos
+    onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+    for video_name in onlyfiles:
+        f = open(mypath+video_name, "r")
+        searchlines2 = f.readlines()
+        f.close()
+        for line in searchlines2:
+            if "encoded" in line:
+                r6=line
+                break
+        print(r6)
+        flag=0
+        fram=""
+        totaltime=""
+        c=2
+        for i in r6:
+            if i is " " and flag is 0:
+                flag=1
+                continue
+            if flag is 1:
+                if i is " ":
+                    flag=2
+                    continue
+                fram+=i
+            if flag is 2:
+                if i is " ":
+                    c-=1
+                if c is 0:
+                    if i is 's':
+                        break
+                    totaltime+=i
+        totaltime=totaltime.replace(" ", "")                
+        print(totaltime)        
+        totalframes=fram.replace(" ", "")                
+        print(totalframes)    
