@@ -1,19 +1,16 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Feb  7 14:04:12 2019
-
-@author: PRIYANSHZALAVADIYA
-"""
-
-
 import os
+import pandas
 
-def vqmt(video1,video2,width,height,frames):
-    #os.system('ffmpeg -i video1 -c:v rawvideo -pix_fmt yuv420p video.yuv')
-    #os.system('ffmpeg -i video2 -c:v rawvideo -pix_fmt yuv420p compress_video.yuv')
-    #os.system('VQMT.exe video.yuv compress_video.yuv width height frames 1 results PSNR SSIM VIFP')
+def vqmt(corePath, inputVideoName, compressedVideoName, width, height, frames, ffmpeg, vqmt):
+    inputVideo = '"' + corePath + '\\Input\\' + inputVideoName + '"'
+    compressedVideo = '"' + corePath + '\\Input\\' + compressedVideoName + '"'
+    originalYUVName = '"' + corePath + '\\Quality\\' + inputVideoName.split(".")[0] + '.yuv"'
+    compressedYUVName = '"' + corePath + '\\Quality\\' + compressedVideoName.split(".")[0] + '.yuv"'
+    qualityResultName = '"' + corePath + '\\Quality\\' + inputVideoName.split(".")[0] + '_qualityResult"'
+    os.system(ffmpeg + ' -i ' + inputVideo + ' -c:v rawvideo -pix_fmt yuv420p ' + originalYUVName)
+    os.system(ffmpeg + ' -i ' + compressedVideo + ' -c:v rawvideo -pix_fmt yuv420p ' + compressedYUVName)
+    os.system(vqmt + originalYUVName + ' ' + compressedYUVName + ' ' + width + ' ' height + ' ' frames + ' 1 ' + qualityResultName + ' PSNR SSIM VIFP')
     
-    import pandas
     df = pandas.read_csv('results_psnr.csv', index_col='frame')
     avgpsnr=df[['value']].mean()
     avgpsnr=avgpsnr.value
