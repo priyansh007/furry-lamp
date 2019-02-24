@@ -6,6 +6,7 @@ from pathlib import Path, PureWindowsPath
 
 def CreateVideoDetail(corePath, inputVideoName, mediaInfo):
     videoPath = '"' + corePath + "\\Input\\" + inputVideoName + '"'
+    print("Creating input video details")
     print(videoPath)
     os.chdir(mediaInfo.replace("\\", "/"))
     os.getcwd()
@@ -22,6 +23,7 @@ def CreateVideoDetail(corePath, inputVideoName, mediaInfo):
     
 def CreateCompVideoDetail(corePath, inputVideoName, mediaInfo):
     compressedVideosPath = corePath + "\\Output\\" + inputVideoName.split('.')[0] + "\\"  # path to compressed videos
+    print("Creating compressed video details")
     print(compressedVideosPath)
     videoFileList = [f for f in listdir(compressedVideosPath) if isfile(join(compressedVideosPath, f))]
     for video in videoFileList:
