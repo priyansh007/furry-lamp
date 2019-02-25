@@ -9,7 +9,7 @@ corePath = str(PureWindowsPath(Path("E:/New folder")))
 ffmpeg = '"' + str(PureWindowsPath(Path("E:/N.I.B.B.A.S/StaxRip 1.9.0.0/Apps/ffmpeg/ffmpeg.exe"))) + '"'
 mkvmerge = '"' + str(PureWindowsPath(Path("E:/N.I.B.B.A.S/StaxRip 1.9.0.0/Apps/MKVToolNix/mkvmerge.exe"))) + '"'
 mediaInfo = str(PureWindowsPath(Path("E:/New folder/MediaInfo/")))
-vqmt = '"' + str(PureWindowsPath(Path("E:/VQMT/VQMT.exe"))) + '"'
+VQMT = '"' + str(PureWindowsPath(Path("E:/VQMT/VQMT.exe"))) + '"'
 videoFileList = [f for f in listdir(corePath + "\\Input\\") if isfile(join(corePath + "\\Input\\", f))]
 presets = ['superfast', 'veryfast', 'faster', 'fast', 'medium', 'slow', 'slower']
 presets1 = ['superfast', 'veryfast']
@@ -20,7 +20,7 @@ for video in videoFileList:
     print("Processing file : " + video)
     Feature_Extraction.feature_extr(corePath + "\\Input\\" + video)
     compressFunc.compressdis(corePath, video, presets1, ffmpeg, mkvmerge)
-    CreateVideoDetails.CreateVideoDetail(corePath, video, mediaInfo)
+    width, height = CreateVideoDetails.CreateVideoDetail(corePath, video, mediaInfo)
     CreateVideoDetails.CreateCompVideoDetail(corePath, video, mediaInfo)
-    CreateVideoDetails.retrieveCompressionDetail(corePath, video)
-    vqmt.videoQualityMeasure(corePath, video, compressedVideo, width, height, frames, ffmpeg, vqmt)
+    frames = CreateVideoDetails.retrieveCompressionDetail(corePath, video)
+    vqmt.videoQualityMeasure(corePath, video, presets1, width, height, str(frames), ffmpeg, VQMT)
