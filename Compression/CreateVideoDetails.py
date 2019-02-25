@@ -20,7 +20,7 @@ def CreateVideoDetail(corePath, inputVideoName, mediaInfo, video_dataframe):
     format = subprocess.check_output('MediaInfo.exe --Inform="General;format=%Format%" "$@" ' + videoPath, shell=True).decode('utf-8')
     print(size)
 
-    index_list = df.index[df['Video Name'] == videoPath].tolist()
+    index_list = video_dataframe.index[video_dataframe['Video Name'] == videoPath].tolist()
 
     for i in index_list:
         video_dataframe['Video Length'][i] = duration
