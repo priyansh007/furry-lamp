@@ -29,6 +29,8 @@ def CreateVideoDetail(corePath, inputVideoName, mediaInfo, video_dataframe):
         video_dataframe['Height'][i] = height
         video_dataframe['Frames per Second'][i] = framerate
         video_dataframe['Original Size'][i] = size
+    
+    return width.rstrip(), height.rstrip()
 
 def CreateCompVideoDetail(corePath, inputVideoName, mediaInfo,  video_dataframe):
     originalVideoPath = '"' + corePath + "\\Input\\" + inputVideoName + '"'
@@ -110,3 +112,4 @@ def retrieveCompressionDetail(corePath, inputVideoName, video_dataframe):
 
         video_dataframe['Compression Duration'][index_for_preset] = compressionTime
         video_dataframe['Frame Count'][index_for_preset] = totalFrames
+        return totalFrames
