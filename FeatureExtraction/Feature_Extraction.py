@@ -22,7 +22,7 @@ def feature_extr(video_name, video_dataframe, presets_list):
     number=fps*0.1
     num=ceil(number)
     ret, frame = cap.read()
-    #cv2.imwrite("temp.jpg", frame)
+    cv2.imwrite("temp.jpg", frame)
 
     while(1):
         i+=1
