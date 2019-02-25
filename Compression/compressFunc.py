@@ -40,9 +40,9 @@ def compressdis(corePath, inputVideo, presets, ffmpeg, mkvmerge):
     outputDir = corePath + "\\Output\\" + inputVideo.split('.')[0] + "\\"
     intermediateDir = corePath + "\\Intermediate\\" + inputVideo.split('.')[0] + "\\"
     statsDir = corePath + "\\Stats\\" + inputVideo.split('.')[0] + "\\"
-    os.makedirs(outputDir.replace("\\", "/"))
-    os.makedirs(intermediateDir.replace("\\", "/"))
-    os.makedirs(statsDir.replace("\\", "/"))
+    os.makedirs(outputDir.replace("\\", "/"), exist_ok=True)
+    os.makedirs(intermediateDir.replace("\\", "/"), exist_ok=True)
+    os.makedirs(statsDir.replace("\\", "/"), exist_ok=True)
     file = open(bat,'w')
     file.write(audioSeperator)
     file.write("\n")
