@@ -1,4 +1,6 @@
 import pandas as pd
+import time
+import datetime
 from os import listdir
 from os.path import isfile, join
 from Compression import compressFunc,CreateVideoDetails,vqmt
@@ -18,9 +20,24 @@ df_for_video_data = pd.DataFrame(columns=['Video Name','Width', 'Height', 'Video
                 'Avg PCC', 'Avg Intensity', 'Compression Preset','Compression Duration', 'Compressed Bitrate', 'Compressed Size'])
 for video in videoFileList:
     print("Processing file : " + video)
+    start = time.time()
     Feature_Extraction.feature_extr(corePath + "\\Input\\" + video, df_for_video_data, presets)
+    end = time.time()
+    feTime = str(datetime.timedelta(end - start))
+    print('Feature Extraction took ' + feTime + ' seconds')
+    
+    start = time.time()
     compressFunc.compressdis(corePath, video, presets1, ffmpeg, mkvmerge)
     width, height = CreateVideoDetails.CreateVideoDetail(corePath, video, mediaInfo, df_for_video_data)
     CreateVideoDetails.CreateCompVideoDetail(corePath, video, mediaInfo, df_for_video_data)
     frames = CreateVideoDetails.retrieveCompressionDetail(corePath, video, df_for_video_data)
+    end = time.time()
+    clTime = str(datetime.timedelta(end - start))
+    print('Compression and Logging took ' + clTime + ' seconds')
+    
+    start = time.time()
     vqmt.videoQualityMeasure(corePath, video, presets1, width, height, frames, ffmpeg, VQMT)
+    end = time.time()
+    vqmtTime = str(datetime.timedelta(end - start))
+    print('Video Quality Measurement took ' + vqmtTime + ' seconds')
+df_for_video_data.to_csv("E:\\New folder\\Dataset\\Dataset.csv")
