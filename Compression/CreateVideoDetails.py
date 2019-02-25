@@ -4,24 +4,36 @@ from os import listdir
 from os.path import isfile, join
 from pathlib import Path, PureWindowsPath
 
-def CreateVideoDetail(corePath, inputVideoName, mediaInfo):
+def CreateVideoDetail(corePath, inputVideoName, mediaInfo, video_dataframe):
     videoPath = '"' + corePath + "\\Input\\" + inputVideoName + '"'
     print("Creating input video details")
     print(videoPath)
     os.chdir(mediaInfo.replace("\\", "/"))
     os.getcwd()
-    name = subprocess.check_output('MediaInfo.exe --Inform="General;name=%FileNameExtension%" "$@" ' + videoPath, shell=True).decode('utf-8')
-    duration = subprocess.check_output('MediaInfo.exe --Inform="General;duration=%Duration%" "$@" ' + videoPath, shell=True).decode('utf-8')
-    vbitrate = subprocess.check_output('MediaInfo.exe --Inform="Video;videobitrate=%BitRate%" "$@" ' + videoPath, shell=True).decode('utf-8')
-    width = subprocess.check_output('MediaInfo.exe --Inform="Video;width=%Width%" "$@" ' + videoPath, shell=True).decode('utf-8')
-    height = subprocess.check_output('MediaInfo.exe --Inform="Video;height=%Height%" "$@" ' + videoPath, shell=True).decode('utf-8')
-    framerate = subprocess.check_output('MediaInfo.exe --Inform="General;framerate=%FrameRate%" "$@" ' + videoPath, shell=True).decode('utf-8')
-    size = subprocess.check_output('MediaInfo.exe --Inform="General;streamsize=%FileSize%" "$@" ' + videoPath, shell=True).decode('utf-8')
-    format = subprocess.check_output('MediaInfo.exe --Inform="General;format=%Format%" "$@" ' + videoPath, shell=True).decode('utf-8')
+    name = subprocess.check_output('MediaInfo.exe --Inform="General;%FileNameExtension%" "$@" ' + videoPath, shell=True).decode('utf-8')
+    duration = subprocess.check_output('MediaInfo.exe --Inform="General;%Duration%" "$@" ' + videoPath, shell=True).decode('utf-8')
+    vbitrate = subprocess.check_output('MediaInfo.exe --Inform="Video;%BitRate%" "$@" ' + videoPath, shell=True).decode('utf-8')
+    width = subprocess.check_output('MediaInfo.exe --Inform="Video;%Width%" "$@" ' + videoPath, shell=True).decode('utf-8')
+    height = subprocess.check_output('MediaInfo.exe --Inform="Video;%Height%" "$@" ' + videoPath, shell=True).decode('utf-8')
+    framerate = subprocess.check_output('MediaInfo.exe --Inform="General;%FrameRate%" "$@" ' + videoPath, shell=True).decode('utf-8')
+    size = subprocess.check_output('MediaInfo.exe --Inform="General;%FileSize%" "$@" ' + videoPath, shell=True).decode('utf-8')
+    format = subprocess.check_output('MediaInfo.exe --Inform="General;%Format%" "$@" ' + videoPath, shell=True).decode('utf-8')
     print(size)
+
+    index_list = video_dataframe.index[video_dataframe['Video Name'] == videoPath].tolist()
+
+    for i in index_list:
+        video_dataframe['Video Length'][i] = duration
+        video_dataframe['Original Bitrate'][i] = vbitrate
+        video_dataframe['Width'][i] = width
+        video_dataframe['Height'][i] = height
+        video_dataframe['Frames per Second'][i] = framerate
+        video_dataframe['Original Size'][i] = size
     
-    
-def CreateCompVideoDetail(corePath, inputVideoName, mediaInfo):
+    return width.rstrip(), height.rstrip()
+
+def CreateCompVideoDetail(corePath, inputVideoName, mediaInfo,  video_dataframe):
+    originalVideoPath = '"' + corePath + "\\Input\\" + inputVideoName + '"'
     compressedVideosPath = corePath + "\\Output\\" + inputVideoName.split('.')[0] + "\\"  # path to compressed videos
     print("Creating compressed video details")
     print(compressedVideosPath)
@@ -30,25 +42,33 @@ def CreateCompVideoDetail(corePath, inputVideoName, mediaInfo):
         os.chdir(mediaInfo.replace("\\", "/"))
         os.getcwd()
         videoPath = '"' + compressedVideosPath + "\\" + video + '"'
-        name = subprocess.check_output('MediaInfo.exe --Inform="General;name=%FileNameExtension%" "$@" ' + videoPath,
+        name = subprocess.check_output('MediaInfo.exe --Inform="General;%FileNameExtension%" "$@" ' + videoPath,
                                        shell=True).decode('utf-8')
-        duration = subprocess.check_output('MediaInfo.exe --Inform="General;duration=%Duration%" "$@" ' + videoPath,
+        duration = subprocess.check_output('MediaInfo.exe --Inform="General;%Duration%" "$@" ' + videoPath,
                                            shell=True).decode('utf-8')
-        vbitrate = subprocess.check_output('MediaInfo.exe --Inform="Video;videobitrate=%BitRate%" "$@" ' + videoPath,
+        vbitrate = subprocess.check_output('MediaInfo.exe --Inform="Video;%BitRate%" "$@" ' + videoPath,
                                            shell=True).decode('utf-8')
-        width = subprocess.check_output('MediaInfo.exe --Inform="Video;width=%Width%" "$@" ' + videoPath,
+        width = subprocess.check_output('MediaInfo.exe --Inform="Video;%Width%" "$@" ' + videoPath,
                                         shell=True).decode('utf-8')
-        height = subprocess.check_output('MediaInfo.exe --Inform="Video;height=%Height%" "$@" ' + videoPath,
+        height = subprocess.check_output('MediaInfo.exe --Inform="Video;%Height%" "$@" ' + videoPath,
                                          shell=True).decode('utf-8')
-        framerate = subprocess.check_output('MediaInfo.exe --Inform="General;framerate=%FrameRate%" "$@" ' + videoPath,
+        framerate = subprocess.check_output('MediaInfo.exe --Inform="General;%FrameRate%" "$@" ' + videoPath,
                                             shell=True).decode('utf-8')
-        size = subprocess.check_output('MediaInfo.exe --Inform="General;streamsize=%FileSize%" "$@" ' + videoPath,
+        size = subprocess.check_output('MediaInfo.exe --Inform="General;%FileSize%" "$@" ' + videoPath,
                                        shell=True).decode('utf-8')
-        format = subprocess.check_output('MediaInfo.exe --Inform="General;format=%Format%" "$@" ' + videoPath,
+        format = subprocess.check_output('MediaInfo.exe --Inform="General;%Format%" "$@" ' + videoPath,
                                          shell=True).decode('utf-8')
         print(vbitrate)
 
-def retrieveCompressionDetail(corePath, inputVideoName):
+        preset_for_given_video = name.split('_')[len(name.split('_'))-1].split('.')[0]
+
+        index_for_preset = video_dataframe.index[(video_dataframe['Video Name'] == originalVideoPath) & (video_dataframe['Compression Preset'] == preset_for_given_video)].tolist()[0]
+
+        video_dataframe['Compressed Bitrate'][index_for_preset] = vbitrate
+        video_dataframe['Compressed Size'][index_for_preset] = size
+
+def retrieveCompressionDetail(corePath, inputVideoName, video_dataframe):
+    originalVideoPath = '"' + corePath + "\\Input\\" + inputVideoName + '"'
     compressionDetailPath = corePath + "\\Stats\\" + inputVideoName.split('.')[0] + "\\"   #path to compressed videos
     txtFileList = [f for f in listdir(compressionDetailPath) if isfile(join(compressionDetailPath, f))]
     for txtFile in txtFileList:
@@ -80,7 +100,16 @@ def retrieveCompressionDetail(corePath, inputVideoName):
                     if i is 's':
                         break
                     totaltime+=i
-        compressionTime = totaltime.replace(" ", "")                
-        print(compressionTime)        
-        totalFrames = fram.replace(" ", "")                
-        print(totalFrames)
+        compressionTime = totaltime.replace(" ", "")
+        print("Compression Duration = "+compressionTime)
+
+        totalFrames = fram.replace(" ", "")
+        print("Frame Count = "+totalFrames)
+
+        preset_for_given_video = txtFile.split('_')[len(txtFile.split('_'))-2]
+
+        index_for_preset = video_dataframe.index[(video_dataframe['Video Name'] == originalVideoPath) & (video_dataframe['Compression Preset'] == preset_for_given_video)].tolist()[0]
+
+        video_dataframe['Compression Duration'][index_for_preset] = compressionTime
+        video_dataframe['Frame Count'][index_for_preset] = totalFrames
+        return totalFrames
