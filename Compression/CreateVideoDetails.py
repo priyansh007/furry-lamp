@@ -4,7 +4,7 @@ from os import listdir
 from os.path import isfile, join
 from pathlib import Path, PureWindowsPath
 
-def CreateVideoDetail(corePath, inputVideoName, mediaInfo):
+def CreateVideoDetail(corePath, inputVideoName, mediaInfo, video_dataframe):
     videoPath = '"' + corePath + "\\Input\\" + inputVideoName + '"'
     print("Creating input video details")
     print(videoPath)
@@ -19,9 +19,19 @@ def CreateVideoDetail(corePath, inputVideoName, mediaInfo):
     size = subprocess.check_output('MediaInfo.exe --Inform="General;streamsize=%FileSize%" "$@" ' + videoPath, shell=True).decode('utf-8')
     format = subprocess.check_output('MediaInfo.exe --Inform="General;format=%Format%" "$@" ' + videoPath, shell=True).decode('utf-8')
     print(size)
-    
-    
-def CreateCompVideoDetail(corePath, inputVideoName, mediaInfo):
+
+    index_list = df.index[df['Video Name'] == videoPath].tolist()
+
+    for i in index_list:
+        video_dataframe['Video Length'][i] = duration
+        video_dataframe['Original Bitrate'][i] = vbitrate
+        video_dataframe['Width'][i] = width
+        video_dataframe['Height'][i] = height
+        video_dataframe['Frames per Second'][i] = framerate
+        video_dataframe['Original Size'][i] = size
+
+def CreateCompVideoDetail(corePath, inputVideoName, mediaInfo,  video_dataframe):
+    # videoPath = '"' + corePath + "\\Input\\" + inputVideoName + '"'
     compressedVideosPath = corePath + "\\Output\\" + inputVideoName.split('.')[0] + "\\"  # path to compressed videos
     print("Creating compressed video details")
     print(compressedVideosPath)
@@ -48,7 +58,9 @@ def CreateCompVideoDetail(corePath, inputVideoName, mediaInfo):
                                          shell=True).decode('utf-8')
         print(vbitrate)
 
-def retrieveCompressionDetail(corePath, inputVideoName):
+        # index_for_preset = df.index[df['Video Name'] == videoPath].tolist()
+
+def retrieveCompressionDetail(corePath, inputVideoName, video_dataframe):
     compressionDetailPath = corePath + "\\Stats\\" + inputVideoName.split('.')[0] + "\\"   #path to compressed videos
     txtFileList = [f for f in listdir(compressionDetailPath) if isfile(join(compressionDetailPath, f))]
     for txtFile in txtFileList:
@@ -80,7 +92,7 @@ def retrieveCompressionDetail(corePath, inputVideoName):
                     if i is 's':
                         break
                     totaltime+=i
-        compressionTime = totaltime.replace(" ", "")                
-        print(compressionTime)        
-        totalFrames = fram.replace(" ", "")                
+        compressionTime = totaltime.replace(" ", "")
+        print(compressionTime)
+        totalFrames = fram.replace(" ", "")
         print(totalFrames)
