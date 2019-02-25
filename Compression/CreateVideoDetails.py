@@ -10,14 +10,14 @@ def CreateVideoDetail(corePath, inputVideoName, mediaInfo, video_dataframe):
     print(videoPath)
     os.chdir(mediaInfo.replace("\\", "/"))
     os.getcwd()
-    name = subprocess.check_output('MediaInfo.exe --Inform="General;name=%FileNameExtension%" "$@" ' + videoPath, shell=True).decode('utf-8')
-    duration = subprocess.check_output('MediaInfo.exe --Inform="General;duration=%Duration%" "$@" ' + videoPath, shell=True).decode('utf-8')
-    vbitrate = subprocess.check_output('MediaInfo.exe --Inform="Video;videobitrate=%BitRate%" "$@" ' + videoPath, shell=True).decode('utf-8')
-    width = subprocess.check_output('MediaInfo.exe --Inform="Video;width=%Width%" "$@" ' + videoPath, shell=True).decode('utf-8')
-    height = subprocess.check_output('MediaInfo.exe --Inform="Video;height=%Height%" "$@" ' + videoPath, shell=True).decode('utf-8')
-    framerate = subprocess.check_output('MediaInfo.exe --Inform="General;framerate=%FrameRate%" "$@" ' + videoPath, shell=True).decode('utf-8')
-    size = subprocess.check_output('MediaInfo.exe --Inform="General;streamsize=%FileSize%" "$@" ' + videoPath, shell=True).decode('utf-8')
-    format = subprocess.check_output('MediaInfo.exe --Inform="General;format=%Format%" "$@" ' + videoPath, shell=True).decode('utf-8')
+    name = subprocess.check_output('MediaInfo.exe --Inform="General;%FileNameExtension%" "$@" ' + videoPath, shell=True).decode('utf-8')
+    duration = subprocess.check_output('MediaInfo.exe --Inform="General;%Duration%" "$@" ' + videoPath, shell=True).decode('utf-8')
+    vbitrate = subprocess.check_output('MediaInfo.exe --Inform="Video;%BitRate%" "$@" ' + videoPath, shell=True).decode('utf-8')
+    width = subprocess.check_output('MediaInfo.exe --Inform="Video;%Width%" "$@" ' + videoPath, shell=True).decode('utf-8')
+    height = subprocess.check_output('MediaInfo.exe --Inform="Video;%Height%" "$@" ' + videoPath, shell=True).decode('utf-8')
+    framerate = subprocess.check_output('MediaInfo.exe --Inform="General;%FrameRate%" "$@" ' + videoPath, shell=True).decode('utf-8')
+    size = subprocess.check_output('MediaInfo.exe --Inform="General;%FileSize%" "$@" ' + videoPath, shell=True).decode('utf-8')
+    format = subprocess.check_output('MediaInfo.exe --Inform="General;%Format%" "$@" ' + videoPath, shell=True).decode('utf-8')
     print(size)
 
     index_list = video_dataframe.index[video_dataframe['Video Name'] == videoPath].tolist()
@@ -40,21 +40,21 @@ def CreateCompVideoDetail(corePath, inputVideoName, mediaInfo,  video_dataframe)
         os.chdir(mediaInfo.replace("\\", "/"))
         os.getcwd()
         videoPath = '"' + compressedVideosPath + "\\" + video + '"'
-        name = subprocess.check_output('MediaInfo.exe --Inform="General;name=%FileNameExtension%" "$@" ' + videoPath,
+        name = subprocess.check_output('MediaInfo.exe --Inform="General;%FileNameExtension%" "$@" ' + videoPath,
                                        shell=True).decode('utf-8')
-        duration = subprocess.check_output('MediaInfo.exe --Inform="General;duration=%Duration%" "$@" ' + videoPath,
+        duration = subprocess.check_output('MediaInfo.exe --Inform="General;%Duration%" "$@" ' + videoPath,
                                            shell=True).decode('utf-8')
-        vbitrate = subprocess.check_output('MediaInfo.exe --Inform="Video;videobitrate=%BitRate%" "$@" ' + videoPath,
+        vbitrate = subprocess.check_output('MediaInfo.exe --Inform="Video;%BitRate%" "$@" ' + videoPath,
                                            shell=True).decode('utf-8')
-        width = subprocess.check_output('MediaInfo.exe --Inform="Video;width=%Width%" "$@" ' + videoPath,
+        width = subprocess.check_output('MediaInfo.exe --Inform="Video;%Width%" "$@" ' + videoPath,
                                         shell=True).decode('utf-8')
-        height = subprocess.check_output('MediaInfo.exe --Inform="Video;height=%Height%" "$@" ' + videoPath,
+        height = subprocess.check_output('MediaInfo.exe --Inform="Video;%Height%" "$@" ' + videoPath,
                                          shell=True).decode('utf-8')
-        framerate = subprocess.check_output('MediaInfo.exe --Inform="General;framerate=%FrameRate%" "$@" ' + videoPath,
+        framerate = subprocess.check_output('MediaInfo.exe --Inform="General;%FrameRate%" "$@" ' + videoPath,
                                             shell=True).decode('utf-8')
-        size = subprocess.check_output('MediaInfo.exe --Inform="General;streamsize=%FileSize%" "$@" ' + videoPath,
+        size = subprocess.check_output('MediaInfo.exe --Inform="General;%FileSize%" "$@" ' + videoPath,
                                        shell=True).decode('utf-8')
-        format = subprocess.check_output('MediaInfo.exe --Inform="General;format=%Format%" "$@" ' + videoPath,
+        format = subprocess.check_output('MediaInfo.exe --Inform="General;%Format%" "$@" ' + videoPath,
                                          shell=True).decode('utf-8')
         print(vbitrate)
 
