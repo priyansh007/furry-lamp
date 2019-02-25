@@ -1,7 +1,7 @@
 import pandas as pd
 from os import listdir
 from os.path import isfile, join
-from Compression import compressFunc,CreateVideoDetails
+from Compression import compressFunc,CreateVideoDetails,vqmt
 from FeatureExtraction import Feature_Extraction
 from pathlib import Path, PureWindowsPath
 
@@ -18,10 +18,9 @@ df_for_video_data = pd.DataFrame(columns=['Video Name','Width', 'Height', 'Video
                 'Avg PCC', 'Avg Intensity', 'Compression Preset','Compression Duration', 'Compressed Bitrate', 'Compressed Size'])
 for video in videoFileList:
     print("Processing file : " + video)
-
     Feature_Extraction.feature_extr(corePath + "\\Input\\" + video, df_for_video_data, presets)
     compressFunc.compressdis(corePath, video, presets1, ffmpeg, mkvmerge)
-    CreateVideoDetails.CreateVideoDetail(corePath, video, mediaInfo, df_for_video_data)
+    width, height = CreateVideoDetails.CreateVideoDetail(corePath, video, mediaInfo, df_for_video_data)
     CreateVideoDetails.CreateCompVideoDetail(corePath, video, mediaInfo, df_for_video_data)
-    CreateVideoDetails.retrieveCompressionDetail(corePath, video, df_for_video_data)
-    vqmt.videoQualityMeasure(corePath, video, compressedVideo, width, height, frames, ffmpeg, vqmt)
+    frames = CreateVideoDetails.retrieveCompressionDetail(corePath, video, df_for_video_data)
+    vqmt.videoQualityMeasure(corePath, video, presets1, width, height, frames, ffmpeg, VQMT)

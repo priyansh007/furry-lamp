@@ -2,7 +2,6 @@ import os
 import subprocess
 from os import listdir
 from os.path import isfile, join
-from pathlib import Path, PureWindowsPath
 
 def CreateVideoDetail(corePath, inputVideoName, mediaInfo, video_dataframe):
     videoPath = '"' + corePath + "\\Input\\" + inputVideoName + '"'
@@ -29,7 +28,7 @@ def CreateVideoDetail(corePath, inputVideoName, mediaInfo, video_dataframe):
         video_dataframe['Height'][i] = height
         video_dataframe['Frames per Second'][i] = framerate
         video_dataframe['Original Size'][i] = size
-    
+    print('Input Video Details acquired')
     return width.rstrip(), height.rstrip()
 
 def CreateCompVideoDetail(corePath, inputVideoName, mediaInfo,  video_dataframe):
@@ -66,6 +65,7 @@ def CreateCompVideoDetail(corePath, inputVideoName, mediaInfo,  video_dataframe)
 
         video_dataframe['Compressed Bitrate'][index_for_preset] = vbitrate
         video_dataframe['Compressed Size'][index_for_preset] = size
+    print('Compressed Video Details acquired')
 
 def retrieveCompressionDetail(corePath, inputVideoName, video_dataframe):
     originalVideoPath = '"' + corePath + "\\Input\\" + inputVideoName + '"'
