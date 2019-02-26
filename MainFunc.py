@@ -1,6 +1,5 @@
 import pandas as pd
 import time
-import datetime
 from os import listdir
 from os.path import isfile, join
 from Compression import compressFunc,CreateVideoDetails,vqmt
@@ -15,7 +14,7 @@ mediaInfo = "E:\\New folder\\MediaInfo\\"
 VQMT = '"E:\\VQMT\\VQMT.exe"'
 videoFileList = [f for f in listdir(corePath + "\\Input\\") if isfile(join(corePath + "\\Input\\", f))]
 presets = ['superfast', 'veryfast', 'faster', 'fast', 'medium', 'slow', 'slower']
-presets1 = ['superfast', 'veryfast', 'medium']
+presets1 = ['superfast']
 df_for_video_data = pd.DataFrame(columns=['Video Name','Width', 'Height', 'Video Length', 'Frames per Second',
                 'Frame Count', 'Original Bitrate', 'Original Size', 'Scene Count', 'Avg Motion %',
                 'Avg PCC', 'Compression Preset','Compression Duration', 'Compressed Bitrate', 'Compressed Size'])
@@ -38,13 +37,12 @@ for video in videoFileList:
     print('Compression and Logging took ' + time.strftime("%H:%M:%S", time.gmtime(clTime)))
 
     start = time.time()
-    vqmt.videoQualityMeasure(corePath, video, presets1, details_of_original_video[2], details_of_original_video[3], preset_wise_duration_and_frames[0][2], ffmpeg, VQMT)
+    vqmt.videoQualityMeasure(corePath, video, presets1, details_of_original_video[3], details_of_original_video[2], preset_wise_duration_and_frames[0][2], ffmpeg, VQMT)
     end = time.time()
-    vqmtTime = str(datetime.timedelta(end - start))
-    print('Video Quality Measurement took ' + vqmtTime + ' seconds')
     vqmtTime = end - start
     print('Video Quality Measurement took ' + time.strftime("%H:%M:%S", time.gmtime(vqmtTime)))
+
     totalProcessTime = float(feTime) + float(clTime) + (vqmtTime)
     print('Processing complete\nTotal Processing Time : ' + time.strftime("%H:%M:%S", time.gmtime(totalProcessTime)))
-    Update_CSV.push_data_to_csv(presets, features_of_original_video, details_of_original_video, preset_wise_bitrate_and_size, preset_wise_duration_and_frames)
+    Update_CSV.push_data_to_csv(presets1, features_of_original_video, details_of_original_video, preset_wise_bitrate_and_size, preset_wise_duration_and_frames)
 
