@@ -1,5 +1,4 @@
 import os
-from pathlib import Path, PureWindowsPath
 
 def createAVS(corePath, inputVideo, avs):
     file = open(avs,'w')
@@ -32,6 +31,7 @@ def generateStatsName(corePath, inputVideoName, presetName):
     return stat
 
 def compressdis(corePath, inputVideo, presets, ffmpeg, mkvmerge):
+    print('Starting Compression Process on ' + inputVideo)
     avs = generateAVSName(corePath, inputVideo)
     audio = generateAudioName(corePath, inputVideo)
     createAVS(corePath, inputVideo, avs)
@@ -40,9 +40,9 @@ def compressdis(corePath, inputVideo, presets, ffmpeg, mkvmerge):
     outputDir = corePath + "\\Output\\" + inputVideo.split('.')[0] + "\\"
     intermediateDir = corePath + "\\Intermediate\\" + inputVideo.split('.')[0] + "\\"
     statsDir = corePath + "\\Stats\\" + inputVideo.split('.')[0] + "\\"
-    os.makedirs(outputDir.replace("\\", "/"))
-    os.makedirs(intermediateDir.replace("\\", "/"))
-    os.makedirs(statsDir.replace("\\", "/"))
+    os.makedirs(outputDir.replace("\\", "/"), exist_ok=True)
+    os.makedirs(intermediateDir.replace("\\", "/"), exist_ok=True)
+    os.makedirs(statsDir.replace("\\", "/"), exist_ok=True)
     file = open(bat,'w')
     file.write(audioSeperator)
     file.write("\n")
@@ -58,3 +58,4 @@ def compressdis(corePath, inputVideo, presets, ffmpeg, mkvmerge):
         file.write("\n")
     file.close()
     os.system('"' + bat + '"')
+    print('Compression complete')

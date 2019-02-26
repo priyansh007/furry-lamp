@@ -2,16 +2,13 @@ import cv2
 from scipy.stats import pearsonr
 import numpy as np
 from math import ceil
-from os import listdir
-from os.path import isfile, join
-import pandas as pd
 
-def feature_extr(video_name):
+def feature_extr(video_name, video_dataframe, presets_list):
+    print("Feature Extraction started.")
     cap = cv2.VideoCapture(video_name)
     fgbg = cv2.createBackgroundSubtractorMOG2()
     fps = cap.get(cv2.CAP_PROP_FPS)
     similarity=[]
-    looper,image=cap.read()
 
     # Scene change
     # Scene = [SCENE NO., 1st FRAME, LAST FRAME, TOTAL MOTION, AVG MOTION, TOTAL CORRELATION, AVG CORRELATION]
@@ -123,4 +120,16 @@ def feature_extr(video_name):
     cv2.destroyAllWindows()
 
     # Append features to dataframe for all 7 presets
-    return [video_name, str(fps), str(len(scene)), avg_mp_rounded, avg_pcc_rounded, final_avg_intensity]
+
+    for preset in presets_list:
+        video_dataframe['Video Name'][len(video_dataframe)] = video_name
+        # video_dataframe.['Frames per Second'][len(video_dataframe)] = str(fps)
+        video_dataframe['Scene Count'][len(video_dataframe)] = str(len(scene))
+        video_dataframe['Avg Motion %'][len(video_dataframe)] = avg_mp_rounded
+        video_dataframe['Avg PCC'][len(video_dataframe)] = avg_pcc_rounded
+        video_dataframe['Avg Intensity'][len(video_dataframe)] = final_avg_intensity
+        video_dataframe['Compression Preset'][len(video_dataframe)] = preset
+
+    print("Feature Extraction completed for "+video_name+" .")
+
+    # return video_dataframe
