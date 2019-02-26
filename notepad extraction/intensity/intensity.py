@@ -14,10 +14,10 @@ cap = cv2.VideoCapture('Dog.mp4')
 looper,image=cap.read()
 count=0
 looper=True
-size = 600, 400
+
 fps = cap.get(cv2.CAP_PROP_FPS)
 
-number=fps*0.1
+number=fps*0.5
 num=ceil(number)
 ret, frame = cap.read()
 cv2.imwrite("asd.jpg", frame)
@@ -44,6 +44,7 @@ while(1):
                 if m.distance < ratio*n.distance:
                     good_points.append(m)
             similarity.append(len(good_points))
+            print(len(good_points))
             cv2.imwrite("asd.jpg", frame)
     else :
         break
