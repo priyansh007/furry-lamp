@@ -3,8 +3,14 @@ from scipy.stats import pearsonr
 import numpy as np
 from math import ceil
 
+# To be Removed
+#import pandas as pd
+#presets = ['superfast', 'veryfast', 'faster', 'fast', 'medium', 'slow', 'slower']
+#video_dataframe = pd.DataFrame(columns=['Video Name','Width', 'Height', 'Video Length', 'Frames per Second','Frame Count', 'Original Bitrate', 'Original Size', 'Scene Count', 'Avg Motion %', 'Avg PCC', 'Avg Intensity', 'Compression Preset','Compression Duration', 'Compressed Bitrate', 'Compressed Size'])
+
+
 def feature_extr(video_name, video_dataframe, presets_list):
-    print("Feature Extraction started.")
+    print("Feature Extraction started for "+video_name+" .")
     cap = cv2.VideoCapture(video_name)
     fgbg = cv2.createBackgroundSubtractorMOG2()
     fps = cap.get(cv2.CAP_PROP_FPS)
@@ -49,19 +55,19 @@ def feature_extr(video_name, video_dataframe, presets_list):
                     corr, p_value = pearsonr(a1.flatten(),a2.flatten() )
 
                 # Intensity
-                sift = cv2.xfeatures2d.SIFT_create()
-                kp_1, desc_1 = sift.detectAndCompute(old_frame, None)
-                kp_2, desc_2 = sift.detectAndCompute(frame, None)
-                index_params = dict(algorithm=0, trees=5)
-                search_params = dict()
-                flann = cv2.FlannBasedMatcher(index_params, search_params)
-                matches = flann.knnMatch(desc_1, desc_2, k=2)
-                good_points=[]
-                ratio = 0.6
-                for m, n in matches:
-                    if m.distance < ratio*n.distance:
-                        good_points.append(m)
-                similarity.append(len(good_points))
+                # sift = cv2.xfeatures2d.SIFT_create()
+                # kp_1, desc_1 = sift.detectAndCompute(old_frame, None)
+                # kp_2, desc_2 = sift.detectAndCompute(frame, None)
+                # index_params = dict(algorithm=0, trees=5)
+                # search_params = dict()
+                # flann = cv2.FlannBasedMatcher(index_params, search_params)
+                # matches = flann.knnMatch(desc_1, desc_2, k=2)
+                # good_points=[]
+                # ratio = 0.6
+                # for m, n in matches:
+                #     if m.distance < ratio*n.distance:
+                #         good_points.append(m)
+                # similarity.append(len(good_points))
 
             cv2.imwrite("temp.jpg", frame)
 
@@ -113,23 +119,36 @@ def feature_extr(video_name, video_dataframe, presets_list):
     avg_pcc_rounded = str(round(avg_pcc,3))+" %"
 
     # Frame by Frame Intensity comparison
-    avg_intensity=sum(similarity) / float(len(similarity))
-    final_avg_intensity=(avg_intensity/max(similarity))*100
+    # avg_intensity=sum(similarity) / float(len(similarity))
+    # final_avg_intensity=(avg_intensity/max(similarity))*100
 
     cap.release()
     cv2.destroyAllWindows()
 
     # Append features to dataframe for all 7 presets
 
-    for preset in presets_list:
-        video_dataframe['Video Name'][len(video_dataframe)] = video_name
-        # video_dataframe.['Frames per Second'][len(video_dataframe)] = str(fps)
-        video_dataframe['Scene Count'][len(video_dataframe)] = str(len(scene))
-        video_dataframe['Avg Motion %'][len(video_dataframe)] = avg_mp_rounded
-        video_dataframe['Avg PCC'][len(video_dataframe)] = avg_pcc_rounded
-        video_dataframe['Avg Intensity'][len(video_dataframe)] = final_avg_intensity
-        video_dataframe['Compression Preset'][len(video_dataframe)] = preset
+    # for preset in presets_list:
+        #video_dataframe = video_dataframe.reindex(video_dataframe.index.values.tolist()+[len(video_dataframe)])
+        # video_dataframe['Video Name'][len(video_dataframe)] = video_name
+        # # video_dataframe.['Frames per Second'][len(video_dataframe)] = str(fps)
+        # video_dataframe['Scene Count'][len(video_dataframe)] = str(len(scene))
+        # video_dataframe['Avg Motion %'][len(video_dataframe)] = avg_mp_rounded
+        # video_dataframe['Avg PCC'][len(video_dataframe)] = avg_pcc_rounded
+        # # video_dataframe['Avg Intensity'][len(video_dataframe)] = final_avg_intensity
+        # video_dataframe['Compression Preset'][len(video_dataframe)] = preset
+        # video_dataframe = video_dataframe.append({'Video Name': video_name, 'Scene Count': str(len(scene)), 'Avg Motion %': avg_mp_rounded, 'Avg PCC': avg_pcc_rounded, 'Compression Preset': preset}, ignore_index=True)
+
+    # print(video_dataframe)
+    # video_dataframe.to_csv("out.csv",index=False)
 
     print("Feature Extraction completed for "+video_name+" .")
 
+    # Append features to dataframe for all 7 presets
+    return [video_name, str(len(scene)), avg_mp_rounded, avg_pcc_rounded]
+
+
     # return video_dataframe
+
+#feature_extr("./Videos/Dog.mp4", video_dataframe, presets)
+#feature_extr("./Videos/Alkesh1.mp4", video_dataframe, presets)
+#feature_extr("./Videos/Alkesh2.mp4", video_dataframe, presets)
