@@ -12,34 +12,36 @@ def videoQualityMeasure(corePath, inputVideoName, presets, width, height, frames
     os.makedirs(qualityDir.replace("\\", "/"), exist_ok=True)
     inputVideo = '"' + corePath + '\\Input\\' + inputVideoName + '"'
     originalYUVName = '"' + corePath + '\\Quality\\' + inputVideoName.split('.')[0] + "\\" + inputVideoName.split(".")[0] + '.yuv"'
-    print('Generating original YUV : ' + ffmpeg + ' -i ' + inputVideo + ' -c:v rawvideo -pix_fmt yuv420p ' + originalYUVName)
-    subprocess.call(ffmpeg + ' -i ' + inputVideo + ' -c:v rawvideo -pix_fmt yuv420p ' + originalYUVName, shell=True)
+    if os.path.isfile(originalYUVName.replace('"','')):
+        print("Deleting previous original YUV")
+        os.remove(originalYUVName.replace('"',''))
+    print('Generating original YUV')
+    print(subprocess.check_output(ffmpeg + ' -i ' + inputVideo + ' -c:v rawvideo -pix_fmt yuv420p ' + originalYUVName, shell=True).decode('utf-8').rstrip())
     for presetName in presets:
         compressedVideo = generateOutputVideoName(corePath, inputVideoName, presetName)
         compressedVideoName = inputVideoName.split(".")[0] + "_outputVideo_" + presetName
         compressedYUVName = '"' + corePath + '\\Quality\\' + inputVideoName.split('.')[0] + "\\" + compressedVideoName + '.yuv"'
         qualityResultName = '"' + corePath + '\\Quality\\' + inputVideoName.split('.')[0] + "\\" + compressedVideoName + '_qualityResult"'
-        print('Generating compressed YUV : ' + ffmpeg + ' -i ' + compressedVideo + ' -c:v rawvideo -pix_fmt yuv420p ' + compressedYUVName)
-        subprocess.call(ffmpeg + ' -i ' + compressedVideo + ' -c:v rawvideo -pix_fmt yuv420p ' + compressedYUVName, shell=True)
-        print('Comparing both YUVs : ' + vqmt + ' ' + originalYUVName + ' ' + compressedYUVName + ' ' + str(width) + ' ' + height + ' ' + str(frames) + ' 1 ' + qualityResultName + ' PSNR SSIM VIFP')
-        subprocess.call(vqmt + ' ' + originalYUVName + ' ' + compressedYUVName + ' ' + width + ' ' + height + ' ' + str(frames) + ' 1 ' + qualityResultName + ' PSNR SSIM VIFP', shell=True)
+        if os.path.isfile(compressedYUVName.replace('"','')):
+            print("Deleting previous compressed YUV")
+            os.remove(compressedYUVName.replace('"',''))
+        print('Generating compressed YUV for ' + presetName)
+        print(subprocess.check_output(ffmpeg + ' -i ' + compressedVideo + ' -c:v rawvideo -pix_fmt yuv420p ' + compressedYUVName, shell=True).decode('utf-8').rstrip())
+        print('Comparing both YUVs')
+        print(subprocess.check_output(vqmt + ' ' + originalYUVName + ' ' + compressedYUVName + ' ' + width + ' ' + height + ' ' + str(frames) + ' 1 ' + qualityResultName + ' PSNR SSIM VIFP', shell=True).decode('utf-8').rstrip())
         
         df = pandas.read_csv(qualityResultName.replace('"','') + '_psnr.csv', index_col='frame')
         avgpsnr=df[['value']].mean()
         avgpsnr=avgpsnr.value
-        print('\tAVG PSNR value : ' + avgpsnr)
+        print('\tAVG PSNR value : ' + str(avgpsnr))
         
         df = pandas.read_csv(qualityResultName.replace('"','') + '_ssim.csv', index_col='frame')
         avgssim=df[['value']].mean()
         avgssim=avgssim.value
-        print('\tAVG SSIM value : ' + avgssim)
+        print('\tAVG SSIM value : ' + str(avgssim))
         
         df = pandas.read_csv(qualityResultName.replace('"','') + '_vifp.csv', index_col='frame')
         avgvifp=df[['value']].mean()
         avgvifp=avgvifp.value
-        print('\tAVG VIFp value : ' + avgvifp)
+        print('\tAVG VIFp value : ' + str(avgvifp))
     print('Video Quality Measurement ended')
-
-#ffmpeg = '"' + str(PureWindowsPath(Path("E:/N.I.B.B.A.S/StaxRip 1.9.0.0/Apps/ffmpeg/ffmpeg.exe"))) + '"'
-#vqmt = '"' + str(PureWindowsPath(Path("E:/VQMT/VQMT.exe"))) + '"'
-#videoQualityMeasure(str(PureWindowsPath(Path("E:/New folder"))), 'WhatsApp Video.mp4', ['superfast', 'veryfast'], 1280, 720, 1853, ffmpeg, vqmt)
