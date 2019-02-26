@@ -47,7 +47,7 @@ def CreateCompVideoDetail(corePath, inputVideoName, mediaInfo):
         duration = subprocess.check_output('MediaInfo.exe --Inform="General;%Duration%" "$@" ' + videoPath,
                                            shell=True).decode('utf-8')
         vbitrate = subprocess.check_output('MediaInfo.exe --Inform="Video;%BitRate%" "$@" ' + videoPath,
-                                           shell=True).decode('utf-8')
+                                           shell=True).decode('utf-8').rstrip()
         width = subprocess.check_output('MediaInfo.exe --Inform="Video;%Width%" "$@" ' + videoPath,
                                         shell=True).decode('utf-8')
         height = subprocess.check_output('MediaInfo.exe --Inform="Video;%Height%" "$@" ' + videoPath,
@@ -55,7 +55,7 @@ def CreateCompVideoDetail(corePath, inputVideoName, mediaInfo):
         framerate = subprocess.check_output('MediaInfo.exe --Inform="General;%FrameRate%" "$@" ' + videoPath,
                                             shell=True).decode('utf-8')
         size = subprocess.check_output('MediaInfo.exe --Inform="General;%FileSize%" "$@" ' + videoPath,
-                                       shell=True).decode('utf-8')
+                                       shell=True).decode('utf-8').rstrip()
         format = subprocess.check_output('MediaInfo.exe --Inform="General;%Format%" "$@" ' + videoPath,
                                          shell=True).decode('utf-8')
         # print(vbitrate)
