@@ -9,7 +9,7 @@ from math import ceil
 #video_dataframe = pd.DataFrame(columns=['Video Name','Width', 'Height', 'Video Length', 'Frames per Second','Frame Count', 'Original Bitrate', 'Original Size', 'Scene Count', 'Avg Motion %', 'Avg PCC', 'Avg Intensity', 'Compression Preset','Compression Duration', 'Compressed Bitrate', 'Compressed Size'])
 
 
-def feature_extr(video_name, video_dataframe, presets_list):
+def feature_extr(video_name):
     print("Feature Extraction started for "+video_name+" .")
     cap = cv2.VideoCapture(video_name)
     fgbg = cv2.createBackgroundSubtractorMOG2()
