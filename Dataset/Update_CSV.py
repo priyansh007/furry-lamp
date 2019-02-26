@@ -1,6 +1,7 @@
 import csv
 
 def push_data_to_csv(presets, features, details, bitrate_and_size, duration_and_frames):
+    print('Pushing')
     for preset in presets:
         with open('video_data.csv', mode='a') as csv_file:
             fieldnames = ['Video Name','Width', 'Height', 'Video Length', 'Frames per Second','Frame Count', 'Original Bitrate', 'Original Size', 'Scene Count', 'Avg Motion %', 'Avg PCC', 'Compression Preset','Compression Duration', 'Compressed Bitrate', 'Compressed Size']
@@ -41,6 +42,7 @@ def push_data_to_csv(presets, features, details, bitrate_and_size, duration_and_
                     'Compressed Bitrate' : bitrate,
                     'Compressed Size' : size
                 })
+    print('done')
 
 # For Test Run
 # presets = ['superfast', 'veryfast', 'faster', 'fast', 'medium', 'slow', 'slower']
