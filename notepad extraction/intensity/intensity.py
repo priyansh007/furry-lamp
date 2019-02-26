@@ -27,7 +27,7 @@ for video_name in onlyfiles:
    
 #from PIL import Image
     cap = cv2.VideoCapture(mypath+video_name)
-    
+    print('video name is',video_name)
     looper,image=cap.read()
     count=0
     looper=True
@@ -68,7 +68,7 @@ for video_name in onlyfiles:
     
     averag=sum(similarity) / float(len(similarity))
     final_averag=(averag/max(similarity))*100
-    print(final_averag)
+    print('final average is'+final_averag)
     row=[video_name,final_averag]
     with open('intensity.csv', 'a', newline='') as csvFile:
         writer = csv.writer(csvFile)
