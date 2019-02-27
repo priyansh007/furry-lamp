@@ -68,9 +68,11 @@ for video_name in onlyfiles:
                 break
         except:
             break
-    
-    averag=sum(similarity) / float(len(similarity))
-    final_averag=(averag/max(similarity))
+    try:
+        averag=sum(similarity) / float(len(similarity))
+        final_averag=(averag/max(similarity))
+    except:
+        final_averag=0
     print('final average is',final_averag)
     row=[video_name,final_averag]
     with open('intensity.csv', 'a', newline='') as csvFile:
