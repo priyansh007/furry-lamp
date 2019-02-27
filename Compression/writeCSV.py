@@ -1,5 +1,5 @@
 def writeCSV(csvPath, presets, features, details, bitrate_and_size, duration_and_frames, presetWiseQualityDetails):
-    print('Pushing')
+    print('Appending rows in dataset')
     file = open(csvPath,'a')
     for preset in presets:
         for i in bitrate_and_size:
