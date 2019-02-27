@@ -4,17 +4,16 @@ from os import listdir
 from os.path import isfile, join
 from Compression import compressFunc,CreateVideoDetails,vqmt,writeCSV
 from FeatureExtraction import Feature_Extraction
-from pathlib import Path, PureWindowsPath
 
-corePath = str(PureWindowsPath(Path("E:/New folder")))
-ffmpeg = '"E:\\N.I.B.B.A.S\\StaxRip 1.9.0.0\\Apps\\ffmpeg\\ffmpeg.exe"'
-mkvmerge = '"E:\\N.I.B.B.A.S\\StaxRip 1.9.0.0\\Apps\\MKVToolNix\\mkvmerge.exe"'
+corePath = "E:\\New folder"
+ffmpeg = '"E:\\Staxrip.2.0.0.0.x64\\Apps\\Encoders\\ffmpeg\\ffmpeg.exe"'
+mkvmerge = '"E:\\Staxrip.2.0.0.0.x64\\Apps\\Support\\MKVToolNix\\mkvmerge.exe"'
 mediaInfo = "E:\\New folder\\MediaInfo\\"
 VQMT = '"E:\\VQMT\\VQMT.exe"'
 outputDataset = corePath + "\\Dataset\\outputDataset.csv"
 videoFileList = [f for f in listdir(corePath + "\\Input\\") if isfile(join(corePath + "\\Input\\", f))]
 presets = ['superfast', 'veryfast', 'faster', 'fast', 'medium', 'slow', 'slower']
-presets1 = ['superfast', 'veryfast']
+presets1 = ['superfast']
 df_for_video_data = pd.DataFrame(columns=['Video Name','Width', 'Height', 'Video Length', 'Frames per Second',
                 'Frame Count', 'Original Bitrate', 'Original Size', 'Scene Count', 'Avg Motion %',
                 'Avg PCC', 'Compression Preset','Compression Duration', 'Compressed Bitrate', 'Compressed Size'])

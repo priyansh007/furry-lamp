@@ -2,12 +2,12 @@ import os
 import subprocess
 
 def createAVS(corePath, inputVideoName, avs):
-    ffmsindex = '"E:\\N.I.B.B.A.S\\StaxRip 1.9.0.0\\Apps\\Plugins\\Both\\FFMS2\\ffmsindex.exe"'
+    ffmsindex = '"E:\\Staxrip.2.0.0.0.x64\\Apps\\Plugins\\Both\\FFMS2\\ffmsindex.exe"'
     inputVideoPath = '"' + corePath + '\\Input\\' + inputVideoName + '"'
     ffindexPath = '"' + corePath + "\\Intermediate\\" + inputVideoName.split('.')[0] + "\\" + inputVideoName.split('.')[0] + "_index.ffindex" + '"'
     print(subprocess.check_output(ffmsindex + ' -f ' + inputVideoPath + ' ' + ffindexPath,shell=True).decode('utf-8').rstrip()) 
     file = open(avs,'w')
-    file.write('LoadCPlugin("E:\\N.I.B.B.A.S\\StaxRip 1.9.0.0\\Apps\\Plugins\\both\\ffms2\\ffms2.dll")\n')
+    file.write('LoadCPlugin("E:\\Staxrip.2.0.0.0.x64\\Apps\\Plugins\\Both\\FFMS2\\ffms2.dll")\n')
     file.write('FFVideoSource(' + inputVideoPath + ', colorspace = "YV12", cachefile = ' + ffindexPath + ')')
     file.close()
 
