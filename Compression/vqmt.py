@@ -10,6 +10,7 @@ def videoQualityMeasure(corePath, inputVideoName, presets, width, height, frames
     print('Video Quality Measurement started for ' + inputVideoName)
     qualityDir = corePath + "\\Quality\\" + inputVideoName.split('.')[0] + "\\"
     os.makedirs(qualityDir.replace("\\", "/"), exist_ok=True)
+    presetWiseQualityDetails = []
     inputVideo = '"' + corePath + '\\Input\\' + inputVideoName + '"'
     originalYUVName = '"' + corePath + '\\Quality\\' + inputVideoName.split('.')[0] + "\\" + inputVideoName.split(".")[0] + '.yuv"'
     if os.path.isfile(originalYUVName.replace('"','')):
@@ -44,4 +45,6 @@ def videoQualityMeasure(corePath, inputVideoName, presets, width, height, frames
         avgvifp=df[['value']].mean()
         avgvifp=avgvifp.value
         print('\tAVG VIFp value : ' + str(avgvifp))
+        presetWiseQualityDetails.append([presetName, str(avgpsnr), str(avgssim), str(avgvifp)])
     print('Video Quality Measurement ended')
+    return presetWiseQualityDetails
