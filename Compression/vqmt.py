@@ -46,5 +46,11 @@ def videoQualityMeasure(corePath, inputVideoName, presets, width, height, frames
         avgvifp=avgvifp.value
         print('\tAVG VIFp value : ' + str(avgvifp))
         presetWiseQualityDetails.append([presetName, str(avgpsnr), str(avgssim), str(avgvifp)])
+        if os.path.isfile(compressedYUVName.replace('"','')):
+            print("Deleting compressed YUV")
+            os.remove(compressedYUVName.replace('"',''))
+    if os.path.isfile(originalYUVName.replace('"','')):
+        print("Deleting original YUV")
+        os.remove(originalYUVName.replace('"',''))
     print('Video Quality Measurement ended')
     return presetWiseQualityDetails
