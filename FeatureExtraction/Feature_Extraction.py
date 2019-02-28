@@ -159,8 +159,8 @@ def feature_extr(video_name, logFile):
         log.close()
 
     except:
-        avg_mp_rounded = 0
-        avg_pcc_rounded = 0
+        avg_mp_rounded = '0'
+        avg_pcc_rounded = '0'
         scene = []
     # Append features to dataframe for all 7 presets
     return [video_name, str(len(scene)), avg_mp_rounded, avg_pcc_rounded]
