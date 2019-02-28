@@ -3,6 +3,12 @@ import subprocess
 from os import listdir
 from os.path import isfile, join
 
+def name_and_ext(video_name):
+    split_list = video_name.split('.')
+    name = '.'.join(split_list[0:len(split_list)-1])
+    extension = split_list[len(split_list)-1]
+    return [name,extension]
+
 def CreateVideoDetail(corePath, inputVideoName, mediaInfo, logFile):
     videoPath = '"' + corePath + "\\Input\\" + inputVideoName + '"'
     print("Creating input video details")
@@ -39,7 +45,7 @@ def CreateVideoDetail(corePath, inputVideoName, mediaInfo, logFile):
 
 def CreateCompVideoDetail(corePath, inputVideoName, mediaInfo, logFile):
     originalVideoPath = '"' + corePath + "\\Input\\" + inputVideoName + '"'
-    compressedVideosPath = corePath + "\\Output\\" + inputVideoName.split('.')[0] + "\\"  # path to compressed videos
+    compressedVideosPath = corePath + "\\Output\\" + name_and_ext(inputVideoName)[0] + "\\"  # path to compressed videos
     print("Creating compressed video details")
     log = open(logFile, 'a')
     log.write("\nCreating compressed video details")
@@ -86,7 +92,7 @@ def CreateCompVideoDetail(corePath, inputVideoName, mediaInfo, logFile):
 
 def retrieveCompressionDetail(corePath, inputVideoName,logFile):
     originalVideoPath = '"' + corePath + "\\Input\\" + inputVideoName + '"'
-    compressionDetailPath = corePath + "\\Stats\\" + inputVideoName.split('.')[0] + "\\"   #path to compressed videos
+    compressionDetailPath = corePath + "\\Stats\\" + name_and_ext(inputVideoName)[0] + "\\"   #path to compressed videos
     txtFileList = [f for f in listdir(compressionDetailPath) if isfile(join(compressionDetailPath, f))]
     preset_wise_features = []
     for txtFile in txtFileList:
