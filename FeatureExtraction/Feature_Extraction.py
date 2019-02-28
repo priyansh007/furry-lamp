@@ -127,8 +127,8 @@ def feature_extr(video_name, logFile):
         avg_mp = total_mp/total_frames
         avg_pcc = total_pcc//total_frames
 
-        avg_mp_rounded = str(round(avg_mp,3))+" %"
-        avg_pcc_rounded = str(round(avg_pcc,3))+" %"
+        avg_mp_rounded = str(round(avg_mp,3)/100)
+        avg_pcc_rounded = str(round(avg_pcc,3)/100)
 
         # Frame by Frame Intensity comparison
         # avg_intensity=sum(similarity) / float(len(similarity))
