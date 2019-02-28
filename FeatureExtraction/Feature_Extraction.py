@@ -163,7 +163,7 @@ def feature_extr(video_name, logFile):
         avg_pcc_rounded = '0'
         scene = []
     # Append features to dataframe for all 7 presets
-    return [video_name, str(len(scene)), avg_mp_rounded, avg_pcc_rounded]
+    return [video_name, str(len(scene)), str(avg_mp_rounded), str(avg_pcc_rounded)]
 
 
     # return video_dataframe
