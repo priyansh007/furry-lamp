@@ -22,7 +22,7 @@ file = open(outputDataset,'w+')
 file.write('Video Name,Width,Height,Video Length,Frames per Second,Frame Count,Original Bitrate,Original Size,Scene Count,Avg Motion %,Avg PCC,Compression Preset,Compression Duration,Compressed Bitrate,Compressed Size, Average PSNR, Average SSIM, Average VIFp')
 file.close()
 for video in videoFileList:
-    logFile = corePath + "\\" + video.split(".")[0] + "_log.txt"
+    logFile = corePath + "\\" + CreateVideoDetails.name_and_ext(video)[0] + "_log.txt"
     try:
         log = open(logFile, 'w+')
         print("Processing file : " + video)
