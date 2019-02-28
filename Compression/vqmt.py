@@ -13,11 +13,11 @@ def generateOutputVideoName(corePath, inputVideoName, presetName):
     return ov
 
 def videoQualityMeasure(corePath, inputVideoName, presets, width, height, frames, ffmpeg, vqmt, logFile):
-    width = modulo8(int(width))
-    height = modulo8(int(height))
+    width = str(modulo8(int(width)))
+    height = str(modulo8(int(height)))
     print('Video Quality Measurement started for ' + inputVideoName)
     log = open(logFile, 'a')
-    log.write('Video Quality Measurement started for ' + inputVideoName)
+    log.write('\nVideo Quality Measurement started for ' + inputVideoName)
     log.close()
     qualityDir = corePath + "\\Quality\\" + inputVideoName.split('.')[0] + "\\"
     os.makedirs(qualityDir.replace("\\", "/"), exist_ok=True)
