@@ -1,5 +1,8 @@
-def writeCSV(csvPath, presets, features, details, bitrate_and_size, duration_and_frames, presetWiseQualityDetails):
+def writeCSV(csvPath, presets, features, details, bitrate_and_size, duration_and_frames, presetWiseQualityDetails, logFile):
     print('Appending rows in dataset')
+    log = open(logFile, 'a')
+    log.write('\nAppending rows in dataset')
+    log.close()
     file = open(csvPath,'a')
     for preset in presets:
         for i in bitrate_and_size:
@@ -23,3 +26,6 @@ def writeCSV(csvPath, presets, features, details, bitrate_and_size, duration_and
 
         file.write('\n' + features[0] + ',' + details[2] + ',' + details[3] + ',' + details[0] + ',' + details[4] + ',' + frames + ',' + details[1] + ',' + details[5] + ',' + features[1] + ',' + features[2] + ',' + features[3] + ',' + preset + ',' + duration + ',' + bitrate + ',' + size + ',' + avgPSNR + ',' + avgSSIM + ',' + avgVIFP)
     print('done')
+    log = open(logFile, 'a')
+    log.write('\ndone')
+    log.close()

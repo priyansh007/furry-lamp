@@ -2,12 +2,12 @@ import os
 import subprocess
 
 def createAVS(corePath, inputVideoName, avs):
-    ffmsindex = '"E:\\Staxrip.2.0.0.0.x64\\Apps\\Plugins\\Both\\FFMS2\\ffmsindex.exe"'
+    ffmsindex = '"D:\\Video Compression\\Staxrip.2.0.0.0.x64\\Apps\\Plugins\\Both\\FFMS2\\ffmsindex.exe"'
     inputVideoPath = '"' + corePath + '\\Input\\' + inputVideoName + '"'
     ffindexPath = '"' + corePath + "\\Intermediate\\" + inputVideoName.split('.')[0] + "\\" + inputVideoName.split('.')[0] + "_index.ffindex" + '"'
     print(subprocess.check_output(ffmsindex + ' -f ' + inputVideoPath + ' ' + ffindexPath,shell=True).decode('utf-8').rstrip()) 
     file = open(avs,'w')
-    file.write('LoadCPlugin("E:\\Staxrip.2.0.0.0.x64\\Apps\\Plugins\\Both\\FFMS2\\ffms2.dll")\n')
+    file.write('LoadCPlugin("D:\\Video Compression\\Staxrip.2.0.0.0.x64\\Apps\\Plugins\\Both\\FFMS2\\ffms2.dll")\n')
     file.write('FFVideoSource(' + inputVideoPath + ', colorspace = "YV12", cachefile = ' + ffindexPath + ')')
     file.close()
 
@@ -27,8 +27,11 @@ def generateStatsName(corePath, inputVideoName, presetName):
     stat = '"' + corePath + "\\Stats\\" + inputVideoName.split('.')[0] + "\\" + inputVideoName.split('.')[0] + "_" + presetName + "_stats.txt" + '"'
     return stat
 
-def compressdis(corePath, inputVideo, presets, ffmpeg, mkvmerge):
+def compressdis(corePath, inputVideo, presets, ffmpeg, mkvmerge, logFile):
     print('Starting Compression Process on ' + inputVideo)
+    log = open(logFile, 'a')
+    log.write('\nStarting Compression Process on ' + inputVideo)
+    log.close
     avs = generateAVSName(corePath, inputVideo)
     bat = generateBatName(corePath, inputVideo)
     outputDir = corePath + "\\Output\\" + inputVideo.split('.')[0] + "\\"
@@ -48,3 +51,6 @@ def compressdis(corePath, inputVideo, presets, ffmpeg, mkvmerge):
     file.close()
     os.system('"' + bat + '"')
     print('Compression complete')
+    log = open(logFile, 'a')
+    log.write('\nCompression complete')
+    log.close()

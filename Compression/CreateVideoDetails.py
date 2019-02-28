@@ -3,9 +3,12 @@ import subprocess
 from os import listdir
 from os.path import isfile, join
 
-def CreateVideoDetail(corePath, inputVideoName, mediaInfo):
+def CreateVideoDetail(corePath, inputVideoName, mediaInfo, logFile):
     videoPath = '"' + corePath + "\\Input\\" + inputVideoName + '"'
     print("Creating input video details")
+    log = open(logFile, 'a')
+    log.write("\nCreating input video details")
+    log.close()
     # print(videoPath)
     os.chdir(mediaInfo.replace("\\", "/"))
     os.getcwd()
@@ -29,12 +32,18 @@ def CreateVideoDetail(corePath, inputVideoName, mediaInfo):
     #     video_dataframe['Original Size'][i] = size
 
     print('Input Video Details acquired')
+    log = open(logFile, 'a')
+    log.write('\nInput Video Details acquired')
+    log.close()
     return [duration, vbitrate, width, height, framerate, size]
 
-def CreateCompVideoDetail(corePath, inputVideoName, mediaInfo):
+def CreateCompVideoDetail(corePath, inputVideoName, mediaInfo, logFile):
     originalVideoPath = '"' + corePath + "\\Input\\" + inputVideoName + '"'
     compressedVideosPath = corePath + "\\Output\\" + inputVideoName.split('.')[0] + "\\"  # path to compressed videos
     print("Creating compressed video details")
+    log = open(logFile, 'a')
+    log.write("\nCreating compressed video details")
+    log.close()
     # print(compressedVideosPath)
     videoFileList = [f for f in listdir(compressedVideosPath) if isfile(join(compressedVideosPath, f))]
     preset_wise_features = []
@@ -70,9 +79,12 @@ def CreateCompVideoDetail(corePath, inputVideoName, mediaInfo):
         preset_wise_features.append([preset_for_given_video,vbitrate,size])
 
     print('Compressed Video Details acquired')
+    log = open(logFile, 'a')
+    log.write('\nCompressed Video Details acquired')
+    log.close()
     return preset_wise_features
 
-def retrieveCompressionDetail(corePath, inputVideoName):
+def retrieveCompressionDetail(corePath, inputVideoName,logFile):
     originalVideoPath = '"' + corePath + "\\Input\\" + inputVideoName + '"'
     compressionDetailPath = corePath + "\\Stats\\" + inputVideoName.split('.')[0] + "\\"   #path to compressed videos
     txtFileList = [f for f in listdir(compressionDetailPath) if isfile(join(compressionDetailPath, f))]
@@ -108,9 +120,15 @@ def retrieveCompressionDetail(corePath, inputVideoName):
                     totaltime+=i
         compressionTime = totaltime.replace(" ", "")
         print("Compression Duration = "+compressionTime)
+        log = open(logFile, 'a')
+        log.write("\nCompression Duration = "+compressionTime)
+        log.close()
 
         totalFrames = fram.replace(" ", "")
         print("Frame Count = "+totalFrames)
+        log = open(logFile, 'a')
+        log.write("\nFrame Count = "+totalFrames)
+        log.close()
 
         preset_for_given_video = txtFile.split('_')[len(txtFile.split('_'))-2]
 
