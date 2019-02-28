@@ -8,12 +8,12 @@ def name_and_ext(video_name):
     return [name,extension]
 
 def createAVS(corePath, inputVideoName, avs):
-    ffmsindex = '"D:\\Video Compression\\Staxrip.2.0.0.0.x64\\Apps\\Plugins\\Both\\FFMS2\\ffmsindex.exe"'
+    ffmsindex = '"C:\\Video Compression\\Staxrip.2.0.0.0.x64\\Apps\\Plugins\\Both\\FFMS2\\ffmsindex.exe"'
     inputVideoPath = '"' + corePath + '\\Input\\' + inputVideoName + '"'
     ffindexPath = '"' + corePath + "\\Intermediate\\" + name_and_ext(inputVideoName)[0] + "\\" + name_and_ext(inputVideoName)[0] + "_index.ffindex" + '"'
     print(subprocess.check_output(ffmsindex + ' -f ' + inputVideoPath + ' ' + ffindexPath,shell=True).decode('utf-8').rstrip())
     file = open(avs,'w')
-    file.write('LoadCPlugin("D:\\Video Compression\\Staxrip.2.0.0.0.x64\\Apps\\Plugins\\Both\\FFMS2\\ffms2.dll")\n')
+    file.write('LoadCPlugin("C:\\Video Compression\\Staxrip.2.0.0.0.x64\\Apps\\Plugins\\Both\\FFMS2\\ffms2.dll")\n')
     file.write('FFVideoSource(' + inputVideoPath + ', colorspace = "YV12", cachefile = ' + ffindexPath + ')')
     file.close()
 

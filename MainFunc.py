@@ -5,11 +5,11 @@ from os.path import isfile, join
 from Compression import compressFunc,CreateVideoDetails,vqmt,writeCSV
 from FeatureExtraction import Feature_Extraction
 
-corePath = "D:\\Video Compression\\Files"
-ffmpeg = '"D:\\Video Compression\\Staxrip.2.0.0.0.x64\\Apps\\Encoders\\ffmpeg\\ffmpeg.exe"'
-mkvmerge = '"D:\\Video Compression\\Staxrip.2.0.0.0.x64\\Apps\\Support\\MKVToolNix\\mkvmerge.exe"'
-mediaInfo = "D:\\Video Compression\\MediaInfo\\"
-VQMT = '"D:\\Video Compression\\VQMT\\VQMT.exe"'
+corePath = "C:\\Video Compression\\Files"
+ffmpeg = '"C:\\Video Compression\\Staxrip.2.0.0.0.x64\\Apps\\Encoders\\ffmpeg\\ffmpeg.exe"'
+mkvmerge = '"C:\\Video Compression\\Staxrip.2.0.0.0.x64\\Apps\\Support\\MKVToolNix\\mkvmerge.exe"'
+mediaInfo = "C:\\Video Compression\\MediaInfo\\"
+VQMT = '"C:\\Video Compression\\VQMT\\VQMT.exe"'
 outputDataset = corePath + "\\Dataset\\outputDataset.csv"
 videoFileList = [f for f in listdir(corePath + "\\Input\\") if isfile(join(corePath + "\\Input\\", f))]
 presets = ['superfast', 'veryfast', 'faster', 'fast', 'medium', 'slow', 'slower']
