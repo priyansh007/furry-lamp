@@ -2,11 +2,19 @@ import os
 import pandas
 import subprocess
 
+def modulo8(value):
+    if(value % 8 == 0):
+        return value
+    else:
+        return (value - (value % 8))
+
 def generateOutputVideoName(corePath, inputVideoName, presetName):
     ov = '"' + corePath + "\\Output\\" + inputVideoName.split('.')[0] + "\\" + inputVideoName.split('.')[0] + "_outputVideo_" + presetName + ".mkv" + '"'
     return ov
 
 def videoQualityMeasure(corePath, inputVideoName, presets, width, height, frames, ffmpeg, vqmt, logFile):
+    width = modulo8(width)
+    height = modulo8(height)
     print('Video Quality Measurement started for ' + inputVideoName)
     log = open(logFile, 'a')
     log.write('Video Quality Measurement started for ' + inputVideoName)
