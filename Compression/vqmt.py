@@ -64,8 +64,17 @@ def videoQualityMeasure(corePath, inputVideoName, presets, width, height, frames
         print(subprocess.check_output(vqmt + ' ' + originalYUVName + ' ' + compressedYUVName + ' ' + width + ' ' + height + ' ' + str(frames) + ' 1 ' + qualityResultName + ' PSNR SSIM VIFP', shell=True).decode('utf-8').rstrip())
 
         df = pandas.read_csv(qualityResultName.replace('"','') + '_psnr.csv', index_col='frame')
-        avgpsnr=df[['value']].mean()
-        avgpsnr=avgpsnr.value
+        avgpsnr=0
+
+        for index, row in df.iterrows():
+            try:
+                q=float(row['value'])
+                q=round(q,2)
+                avgpsnr=(avgpsnr+q)/2
+                #print(q)
+            except:
+                continue
+        avgpsnr=round(avgpsnr,2)
         print('\tAVG PSNR value : ' + str(avgpsnr))
         log = open(logFile, 'a')
         log.write('\n\tAVG PSNR value : ' + str(avgpsnr))
