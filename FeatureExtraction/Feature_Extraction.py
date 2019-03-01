@@ -1,7 +1,7 @@
 import cv2
 from scipy.stats import pearsonr
 import numpy as np
-from math import ceil
+from math import ceil, isnan
 
 # To be Removed
 #import pandas as pd
@@ -61,6 +61,8 @@ def feature_extr(video_name, logFile):
                     a2 = np.array(frame)
                     if a1.shape == a2.shape:
                         corr, p_value = pearsonr(a1.flatten(),a2.flatten() )
+                        if isnan(corr):
+                            corr=1
 
                     # Intensity
                     # sift = cv2.xfeatures2d.SIFT_create()
