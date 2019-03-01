@@ -125,7 +125,7 @@ def feature_extr(video_name, logFile):
 
         # Average Motion Percentage and PCC for entire video
         avg_mp = total_mp/total_frames
-        avg_pcc = total_pcc//total_frames
+        avg_pcc = total_pcc/total_frames
 
         avg_mp_rounded = str(round(avg_mp,3)/100)
         avg_pcc_rounded = str(round(avg_pcc,3)/100)
