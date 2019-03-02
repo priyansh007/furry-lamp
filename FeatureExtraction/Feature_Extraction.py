@@ -60,7 +60,11 @@ def feature_extr(video_name, logFile):
                     a1 = np.array(old_frame)
                     a2 = np.array(frame)
                     if a1.shape == a2.shape:
-                        corr, p_value = pearsonr(a1.flatten(),a2.flatten() )
+                        try:
+                            corr, p_value = pearsonr(a1.flatten(),a2.flatten() )
+                        except Exception as e:
+                            print('pearson error ' + e)
+                            continue
                         if isnan(corr):
                             corr=1
 
@@ -160,7 +164,8 @@ def feature_extr(video_name, logFile):
         log.write("\nFeature Extraction completed for "+video_name+" .")
         log.close()
 
-    except:
+    except Exception as e:
+        print(e)
         avg_mp_rounded = '0'
         avg_pcc_rounded = '0'
         scene = []
