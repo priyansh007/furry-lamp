@@ -81,16 +81,32 @@ def videoQualityMeasure(corePath, inputVideoName, presets, width, height, frames
         log.close()
 
         df = pandas.read_csv(qualityResultName.replace('"','') + '_ssim.csv', index_col='frame')
-        avgssim=df[['value']].mean()
-        avgssim=avgssim.value
+        avgssim=0
+
+        for index, row in df.iterrows():
+            try:
+                q=float(row['value'])
+                q=round(q,4)
+                avgssim=(avgssim+q)/2
+                #print(q)
+            except:
+                continue		
         print('\tAVG SSIM value : ' + str(avgssim))
         log = open(logFile, 'a')
         log.write('\n\tAVG SSIM value : ' + str(avgssim))
         log.close()
 
         df = pandas.read_csv(qualityResultName.replace('"','') + '_vifp.csv', index_col='frame')
-        avgvifp=df[['value']].mean()
-        avgvifp=avgvifp.value
+        avgvifp=0
+
+        for index, row in df.iterrows():
+            try:
+                q=float(row['value'])
+                q=round(q,4)
+                avgvifp=(avgvifp+q)/2
+                #print(q)
+            except:
+                continue		
         print('\tAVG VIFp value : ' + str(avgvifp))
         log = open(logFile, 'a')
         log.write('\n\tAVG VIFp value : ' + str(avgvifp))
