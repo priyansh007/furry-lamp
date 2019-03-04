@@ -15,7 +15,7 @@ import csv
 from math import ceil
 from os import listdir
 from os.path import isfile, join
-mypath = "F:/project/project videos/"
+mypath = "C:/Video Compression/Files/Input_intensity/"
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 csvData = [['videoname','averageintensitycomparision']]
 with open('intensity.csv', 'w', newline='') as csvFile:
