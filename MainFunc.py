@@ -70,7 +70,7 @@ for video in videoFileList:
     
         writeCSV.writeCSV(outputDataset, presets, features_of_original_video, details_of_original_video, preset_wise_bitrate_and_size, preset_wise_duration_and_frames, presetWiseQualityDetails, logFile)
     
-        totalProcessTime = float(feTime) + float(clTime) + (vqmtTime)
+        totalProcessTime = float(feTime) + float(clTime) + float(vqmtTime)
         print('Processing complete\nTotal Processing Time : ' + timeFormat(totalProcessTime))
         log = open(logFile, 'a')
         log.write('\nProcessing complete\nTotal Processing Time : ' + timeFormat(totalProcessTime))
