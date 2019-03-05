@@ -5,6 +5,16 @@ from os.path import isfile, join
 from Compression import compressFunc,CreateVideoDetails,vqmt,writeCSV
 from FeatureExtraction import Feature_Extraction
 
+def timeFormat(seconds): 
+    day = seconds // (24 * 3600)   
+    seconds = seconds % (24 * 3600) 
+    hour = seconds // 3600
+    seconds %= 3600
+    minutes = seconds // 60
+    seconds %= 60
+    seconds = seconds  
+    return str(day + ":" + hour + ":" + minutes + ":" + seconds)
+
 corePath = "C:\\Video Compression\\Files"
 ffmpeg = '"C:\\Video Compression\\Staxrip.2.0.0.0.x64\\Apps\\Encoders\\ffmpeg\\ffmpeg.exe"'
 mkvmerge = '"C:\\Video Compression\\Staxrip.2.0.0.0.x64\\Apps\\Support\\MKVToolNix\\mkvmerge.exe"'
@@ -32,9 +42,9 @@ for video in videoFileList:
         features_of_original_video = Feature_Extraction.feature_extr(corePath + "\\Input\\" + video, logFile)
         end = time.time()
         feTime = end - start
-        print('Feature Extraction took ' + time.strftime("%H:%M:%S", time.gmtime(feTime)))
+        print('Feature Extraction took ' + timeFormat(feTime))
         log = open(logFile, 'a')
-        log.write('\nFeature Extraction took ' + time.strftime("%H:%M:%S", time.gmtime(feTime)))
+        log.write('\nFeature Extraction took ' + timeFormat(feTime))
         log.close()
     
         start = time.time()
@@ -44,26 +54,26 @@ for video in videoFileList:
         preset_wise_duration_and_frames = CreateVideoDetails.retrieveCompressionDetail(corePath, video, logFile)
         end = time.time()
         clTime = end - start
-        print('Compression and Logging took ' + time.strftime("%H:%M:%S", time.gmtime(clTime)))
+        print('Compression and Logging took ' + timeFormat(clTime))
         log = open(logFile, 'a')
-        log.write('\nCompression and Logging took ' + time.strftime("%H:%M:%S", time.gmtime(clTime)))
+        log.write('\nCompression and Logging took ' + timeFormat(clTime))
         log.close()
     
         start = time.time()
         presetWiseQualityDetails = vqmt.videoQualityMeasure(corePath, video, presets, details_of_original_video[3], details_of_original_video[2], preset_wise_duration_and_frames[0][2], ffmpeg, VQMT, logFile)
         end = time.time()
         vqmtTime = end - start
-        print('Video Quality Measurement took ' + time.strftime("%H:%M:%S", time.gmtime(vqmtTime)))
+        print('Video Quality Measurement took ' + timeFormat(vqmtTime))
         log = open(logFile, 'a')
-        log.write('\nVideo Quality Measurement took ' + time.strftime("%H:%M:%S", time.gmtime(vqmtTime)))
+        log.write('\nVideo Quality Measurement took ' + timeFormat(vqmtTime))
         log.close()
     
         writeCSV.writeCSV(outputDataset, presets, features_of_original_video, details_of_original_video, preset_wise_bitrate_and_size, preset_wise_duration_and_frames, presetWiseQualityDetails, logFile)
     
         totalProcessTime = float(feTime) + float(clTime) + (vqmtTime)
-        print('Processing complete\nTotal Processing Time : ' + time.strftime("%H:%M:%S", time.gmtime(totalProcessTime)))
+        print('Processing complete\nTotal Processing Time : ' + timeFormat(totalProcessTime))
         log = open(logFile, 'a')
-        log.write('\nProcessing complete\nTotal Processing Time : ' + time.strftime("%H:%M:%S", time.gmtime(totalProcessTime)))
+        log.write('\nProcessing complete\nTotal Processing Time : ' + timeFormat(totalProcessTime))
         log.close()
     except Exception as e:
         log = open(logFile, 'a')
