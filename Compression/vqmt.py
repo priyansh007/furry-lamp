@@ -61,8 +61,11 @@ def videoQualityMeasure(corePath, inputVideoName, presets, width, height, frames
         log = open(logFile, 'a')
         log.write('\nComparing both YUVs')
         log.close()
-        print(subprocess.check_output(vqmt + ' ' + originalYUVName + ' ' + compressedYUVName + ' ' + width + ' ' + height + ' ' + str(frames) + ' 1 ' + qualityResultName + ' PSNR SSIM VIFP', shell=True).decode('utf-8').rstrip())
-
+        processTime = subprocess.check_output(vqmt + ' ' + originalYUVName + ' ' + compressedYUVName + ' ' + width + ' ' + height + ' ' + str(frames) + ' 1 ' + qualityResultName + ' PSNR SSIM VIFP', shell=True).decode('utf-8').rstrip()
+        print(processTime)
+        log = open(logFile, 'a')
+        log.write('\n' + processTime)
+        log.close()
         df = pandas.read_csv(qualityResultName.replace('"','') + '_psnr.csv', index_col='frame')
         avgpsnr=0
 
