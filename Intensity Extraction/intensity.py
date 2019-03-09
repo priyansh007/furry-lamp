@@ -15,7 +15,7 @@ import csv
 from math import ceil
 from os import listdir
 from os.path import isfile, join
-mypath = "F:/project/project videos/"
+mypath = "C:/Video Compression/Files/Input_intensity/"
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 csvData = [['videoname','averageintensitycomparision']]
 with open('intensity.csv', 'w', newline='') as csvFile:
@@ -34,7 +34,7 @@ for video_name in onlyfiles:
     
     fps = cap.get(cv2.CAP_PROP_FPS)
     
-    number=fps*0.5
+    number=fps*0.1
     num=ceil(number)
     ret, frame = cap.read()
     cv2.imwrite("asd.jpg", frame)
