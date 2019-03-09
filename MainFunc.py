@@ -12,8 +12,8 @@ def timeFormat(seconds):
     seconds %= 3600
     minutes = seconds // 60
     seconds %= 60
-    seconds = seconds  
-    return str(day + ":" + hour + ":" + minutes + ":" + seconds)
+    seconds = seconds
+    return str(str(int(day)) + " days " + str(int(hour))+ " hours " + str(int(minutes)) + " minutes " + str(int(seconds)) + " seconds")
 
 corePath = "C:\\Video Compression\\Files"
 ffmpeg = '"C:\\Video Compression\\Staxrip.2.0.0.0.x64\\Apps\\Encoders\\ffmpeg\\ffmpeg.exe"'
