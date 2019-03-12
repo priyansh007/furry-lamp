@@ -39,7 +39,7 @@ for video in videoFileList:
         log.write("Processing file : " + video)
         log.close()
         start = time.time()
-        features_of_original_video = Feature_Extraction.feature_extr(corePath + "\\Input\\" + video, logFile)
+        features_of_original_video = Feature_Extraction.feature_extr(corePath + "\\Input\\" + video, logFile, video)
         end = time.time()
         feTime = end - start
         print('Feature Extraction took ' + timeFormat(feTime))
