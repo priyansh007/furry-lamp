@@ -9,7 +9,7 @@ from math import ceil, isnan
 #video_dataframe = pd.DataFrame(columns=['Video Name','Width', 'Height', 'Video Length', 'Frames per Second','Frame Count', 'Original Bitrate', 'Original Size', 'Scene Count', 'Avg Motion %', 'Avg PCC', 'Avg Intensity', 'Compression Preset','Compression Duration', 'Compressed Bitrate', 'Compressed Size'])
 
 
-def feature_extr(video_name, logFile):
+def feature_extr(video_name, logFile, short_video_name):
     try:
         print("Feature Extraction started for "+video_name+" .")
         log = open(logFile, 'a')
@@ -170,7 +170,7 @@ def feature_extr(video_name, logFile):
         avg_pcc_rounded = '0'
         scene = []
     # Append features to dataframe for all 7 presets
-    return [video_name, str(len(scene)), str(avg_mp_rounded), str(avg_pcc_rounded)]
+    return [short_video_name, str(len(scene)), str(avg_mp_rounded), str(avg_pcc_rounded)]
 
 
     # return video_dataframe
