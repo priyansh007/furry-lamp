@@ -50,7 +50,7 @@ video_dataset$SSIM.By.Duration <- video_dataset$Normalized.SSIM/video_dataset$No
 # VIFp BY NORMALIZED DURATION
 video_dataset$VIFp.By.Duration <- video_dataset$Normalized.VIFp/video_dataset$Normalized.Duration
 
-# METRIC = (PSNR + SSIM + VIFp)/ (DURATION * COMPRESSED SIZEvideo_dataset$Ratio1 <- round((video_dataset$Normalized.PSNR + video_dataset$Normalized.SSIM + video_dataset$Normalized.VIFp)/video_dataset$Normalized.Duration, digits = 7)
+# METRIC = (PSNR + SSIM + VIFp)/ (DURATION * COMPRESSED SIZE
 video_dataset$Metric <- round( (video_dataset$Normalized.PSNR + video_dataset$Normalized.SSIM + video_dataset$Normalized.VIFp) / (video_dataset$Normalized.Duration * video_dataset$Normalized.Size), digits = 7)
 metric_max <- setNames(aggregate(video_dataset$Metric, by = list(video_dataset$Video.Name), max), c("Video.Name", "Metric"))
 dataset_with_output_preset <- merge(video_dataset, metric_max,c("Video.Name","Metric"))
