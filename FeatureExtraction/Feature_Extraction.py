@@ -1,4 +1,5 @@
 import cv2
+import os
 from scipy.stats import pearsonr
 import numpy as np
 from math import ceil, isnan
@@ -148,14 +149,15 @@ def feature_extr(video_name, logFile, short_video_name):
         scene = []
 
     if os.path.isfile('temp.jpg'):
-            os.remove('temp.jpg')
+        print("Removing temp.jpg")
+        os.remove('temp.jpg')
             
-    print("Feature Extraction completed for " + short_video_name)     
-    print("Scene Count: " + str(len(scene)) + "\nAverage Motion: " + str(avg_mp_rounded) + "\nAverage PCC: " + str(avg_pcc_rounded))
+    print("\tScene Count: " + str(len(scene)) + "\n\tAverage Motion: " + str(avg_mp_rounded) + "\n\tAverage PCC: " + str(avg_pcc_rounded))
+    print("Feature Extraction completed for " + short_video_name)
 
     log = open(logFile, 'a')
+    log.write("\n\tScene Count: " + str(len(scene)) + "\n\tAverage Motion: " + str(avg_mp_rounded) + "\n\tAverage PCC: " + str(avg_pcc_rounded))
     log.write("\nFeature Extraction completed for " + short_video_name)
-    log.write("\nScene Count: " + str(len(scene)) + "\nAverage Motion: " + str(avg_mp_rounded) + "\nAverage PCC: " + str(avg_pcc_rounded))
     log.close()
 
     return [short_video_name, str(len(scene)), str(avg_mp_rounded), str(avg_pcc_rounded)]
