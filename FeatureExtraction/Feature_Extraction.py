@@ -3,17 +3,12 @@ from scipy.stats import pearsonr
 import numpy as np
 from math import ceil, isnan
 
-# To be Removed
-#import pandas as pd
-#presets = ['superfast', 'veryfast', 'faster', 'fast', 'medium', 'slow', 'slower']
-#video_dataframe = pd.DataFrame(columns=['Video Name','Width', 'Height', 'Video Length', 'Frames per Second','Frame Count', 'Original Bitrate', 'Original Size', 'Scene Count', 'Avg Motion %', 'Avg PCC', 'Avg Intensity', 'Compression Preset','Compression Duration', 'Compressed Bitrate', 'Compressed Size'])
-
 
 def feature_extr(video_name, logFile, short_video_name):
     try:
-        print("Feature Extraction started for "+video_name+" .")
+        print("Feature Extraction started for " + short_video_name)
         log = open(logFile, 'a')
-        log.write("\nFeature Extraction started for "+video_name+" .")
+        log.write("\nFeature Extraction started for " + short_video_name)
         log.close()
         cap = cv2.VideoCapture(video_name)
         fgbg = cv2.createBackgroundSubtractorMOG2()
@@ -143,39 +138,24 @@ def feature_extr(video_name, logFile, short_video_name):
         cap.release()
         cv2.destroyAllWindows()
 
-        # Append features to dataframe for all 7 presets
-
-        # for preset in presets_list:
-            #video_dataframe = video_dataframe.reindex(video_dataframe.index.values.tolist()+[len(video_dataframe)])
-            # video_dataframe['Video Name'][len(video_dataframe)] = video_name
-            # # video_dataframe.['Frames per Second'][len(video_dataframe)] = str(fps)
-            # video_dataframe['Scene Count'][len(video_dataframe)] = str(len(scene))
-            # video_dataframe['Avg Motion %'][len(video_dataframe)] = avg_mp_rounded
-            # video_dataframe['Avg PCC'][len(video_dataframe)] = avg_pcc_rounded
-            # # video_dataframe['Avg Intensity'][len(video_dataframe)] = final_avg_intensity
-            # video_dataframe['Compression Preset'][len(video_dataframe)] = preset
-            # video_dataframe = video_dataframe.append({'Video Name': video_name, 'Scene Count': str(len(scene)), 'Avg Motion %': avg_mp_rounded, 'Avg PCC': avg_pcc_rounded, 'Compression Preset': preset}, ignore_index=True)
-
-        # print(video_dataframe)
-        # video_dataframe.to_csv("out.csv",index=False)
-
-        log = open(logFile, 'a')
-        print("Feature Extraction completed for "+video_name+" .")
-        log.write("\nFeature Extraction completed for "+video_name+" .")
-        log.close()
-
     except Exception as e:
         print(e)
+        log = open(logFile, 'a')
+        log.write("\n" + str(e))
+        log.close()
         avg_mp_rounded = '0'
         avg_pcc_rounded = '0'
         scene = []
-    # Append features to dataframe for all 7 presets
+
+    if os.path.isfile('temp.jpg'):
+            os.remove('temp.jpg')
+            
+    print("Feature Extraction completed for " + short_video_name)     
+    print("Scene Count: " + str(len(scene)) + "\nAverage Motion: " + str(avg_mp_rounded) + "\nAverage PCC: " + str(avg_pcc_rounded))
+
+    log = open(logFile, 'a')
+    log.write("\nFeature Extraction completed for " + short_video_name)
+    log.write("\nScene Count: " + str(len(scene)) + "\nAverage Motion: " + str(avg_mp_rounded) + "\nAverage PCC: " + str(avg_pcc_rounded))
+    log.close()
+
     return [short_video_name, str(len(scene)), str(avg_mp_rounded), str(avg_pcc_rounded)]
-
-
-    # return video_dataframe
-#print(name_and_ext("./Videos/Alkesh1.mp4"))
-#print(name_and_ext("asd.Vid.eos.Alk.sh1.mp4"))
-#feature_extr("./Videos/Dog.mp4", video_dataframe, presets)
-#print(feature_extr("./Videos/Alkesh1.mp4", "a.txt"))
-#feature_extr("./Videos/Alkesh2.mp4", video_dataframe, presets)
