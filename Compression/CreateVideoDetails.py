@@ -26,16 +26,10 @@ def CreateVideoDetail(corePath, inputVideoName, mediaInfo, logFile):
     framerate = subprocess.check_output('MediaInfo.exe --Inform="General;%FrameRate%" "$@" ' + videoPath, shell=True).decode('utf-8').rstrip()
     size = subprocess.check_output('MediaInfo.exe --Inform="General;%FileSize%" "$@" ' + videoPath, shell=True).decode('utf-8').rstrip()
     format = subprocess.check_output('MediaInfo.exe --Inform="General;%Format%" "$@" ' + videoPath, shell=True).decode('utf-8').rstrip()
-    #print(size)
-    # index_list = video_dataframe.index[video_dataframe['Video Name'] == videoPath].tolist()
-    #
-    # for i in index_list:
-    #     video_dataframe['Video Length'][i] = duration
-    #     video_dataframe['Original Bitrate'][i] = vbitrate
-    #     video_dataframe['Width'][i] = width
-    #     video_dataframe['Height'][i] = height
-    #     video_dataframe['Frames per Second'][i] = framerate
-    #     video_dataframe['Original Size'][i] = size
+    
+    duration = str(float(duration) / 1000)
+    vbitrate = str(float(vbitrate) / 8192)
+    size = str(float(size) / 1048576)
 
     print('Input Video Details acquired')
     log = open(logFile, 'a')
@@ -73,15 +67,10 @@ def CreateCompVideoDetail(corePath, inputVideoName, mediaInfo, logFile):
                                        shell=True).decode('utf-8').rstrip()
         format = subprocess.check_output('MediaInfo.exe --Inform="General;%Format%" "$@" ' + videoPath,
                                          shell=True).decode('utf-8')
-        # print(vbitrate)
 
         preset_for_given_video = name.split('_')[len(name.split('_'))-1].split('.')[0]
-
-        # index_for_preset = video_dataframe.index[(video_dataframe['Video Name'] == originalVideoPath) & (video_dataframe['Compression Preset'] == preset_for_given_video)].tolist()[0]
-        #
-        # video_dataframe['Compressed Bitrate'][index_for_preset] = vbitrate
-        # video_dataframe['Compressed Size'][index_for_preset] = size
-
+        vbitrate = str(float(vbitrate) / 8192)
+        size = str(float(size) / 1048576)
         preset_wise_features.append([preset_for_given_video,vbitrate,size])
 
     print('Compressed Video Details acquired')
@@ -124,24 +113,21 @@ def retrieveCompressionDetail(corePath, inputVideoName,logFile):
                     if i is 's':
                         break
                     totaltime+=i
+
         compressionTime = totaltime.replace(" ", "")
-        print("Compression Duration = "+compressionTime)
+        preset_for_given_video = txtFile.split('_')[len(txtFile.split('_'))-2]
+        print("For " + preset_for_given_video + ":")
+        print("\tCompression Duration for : " + compressionTime)
         log = open(logFile, 'a')
-        log.write("\nCompression Duration = "+compressionTime)
+        log.write("\nFor " + preset_for_given_video + ":")
+        log.write("\n\tCompression Duration for " + preset_for_given_video + " : " + compressionTime)
         log.close()
 
         totalFrames = fram.replace(" ", "")
-        print("Frame Count = "+totalFrames)
+        print("\tFrame Count = "+totalFrames)
         log = open(logFile, 'a')
-        log.write("\nFrame Count = "+totalFrames)
+        log.write("\n\tFrame Count = "+totalFrames)
         log.close()
-
-        preset_for_given_video = txtFile.split('_')[len(txtFile.split('_'))-2]
-
-        # index_for_preset = video_dataframe.index[(video_dataframe['Video Name'] == originalVideoPath) & (video_dataframe['Compression Preset'] == preset_for_given_video)].tolist()[0]
-        #
-        # video_dataframe['Compression Duration'][index_for_preset] = compressionTime
-        # video_dataframe['Frame Count'][index_for_preset] = totalFrames
 
         preset_wise_features.append([preset_for_given_video,compressionTime,totalFrames])
 
