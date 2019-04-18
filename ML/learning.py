@@ -11,7 +11,7 @@ import pandas
 df = pandas.read_csv('data_final_with_output_presets.csv')
 print()
 #Input array
-X=np.array(df[['Avg.PCC','Avg.Motion','Scene.Count','Video.Length','Frames.per.Second','Original.Bitrate']])
+X=np.array(df[['Avg.PCC','Avg.Motion','averageintensitycomparision','Scene.Count','Frames.per.Second','Original.Bitrate','Width','Height']])
 
 #Output
 y=np.array(df[['Compression.Preset']])
