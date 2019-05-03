@@ -15,7 +15,7 @@ X=np.array(df[['Avg.PCC','Avg.Motion','averageintensitycomparision','Scene.Count
 
 #Output
 y=np.array(df[['Compression.Preset']])
-
+print(X)
 #Sigmoid Function
 def sigmoid (x):
     return 1/(1 + np.exp(-x))
@@ -25,7 +25,7 @@ def derivatives_sigmoid(x):
     return x * (1 - x)
 
 #Variable initialization
-epoch=5000 #Setting training iterations
+epoch=10#Setting training iterations
 lr=0.1 #Setting learning rate
 inputlayer_neurons = X.shape[1] #number of features in data set
 hiddenlayer_neurons = 50 #number of hidden layers neurons

@@ -17,9 +17,9 @@ def main():
     # Settings
     # ===================================
     csv_filename = "data/data_final_with_output_presets.csv"
-    hidden_layers = [5] # number of nodes in hidden layers i.e. [layer1, layer2, ...]
-    eta = 0.1 # learning rate
-    n_epochs = 400 # number of training epochs
+    hidden_layers = [10] # number of nodes in hidden layers i.e. [layer1, layer2, ...]
+    eta = 0.01 # learning rate
+    n_epochs = 40 # number of training epochs
     n_folds = 4 # number of folds for cross-validation
     seed_crossval = 1 # seed for cross-validation
     seed_weights = 1 # seed for NN weight initialization
@@ -29,6 +29,7 @@ def main():
     # ===================================
     print("Reading '{}'...".format(csv_filename))
     X, y, n_classes = utils.read_csv(csv_filename, target_name="Compression.Preset", normalize=True)
+    print(n_classes)
     N, d = X.shape
     print(" -> X.shape = {}, y.shape = {}, n_classes = {}\n".format(X.shape, y.shape, n_classes))
 
