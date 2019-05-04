@@ -59,7 +59,7 @@ X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = 0.2,random_stat
 
 
 #clf = RandomForestClassifier(n_estimators=100, max_depth = 7, random_state=0)
-clf = GradientBoostingClassifier(n_estimators=50, max_depth = 3, random_state=0)
+clf = GradientBoostingClassifier(n_estimators=40, max_depth = 2, random_state=0)
 
 clf.fit(X_train, y_train)
 
