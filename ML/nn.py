@@ -42,8 +42,8 @@ import numpy as np
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
-from mlxtend.evaluate import confusion_matrix
-from mlxtend.plotting import plot_confusion_matrix
+#from mlxtend.evaluate import confusion_matrix
+#from mlxtend.plotting import plot_confusion_matrix
 import matplotlib.pyplot as plt
 
 import pandas
@@ -58,7 +58,7 @@ y=np.squeeze(np.array(df[['Compression.Preset']]))
 #y = np.random.choice([0,1],size = (100))
 #print(X)
 #print(y.shape)
-X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = 0.2,random_state = 0)
+X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = 0.15,random_state = 0)
 
 
 #clf = RandomForestClassifier(n_estimators=100, max_depth = 7, random_state=0)
@@ -68,19 +68,20 @@ clf.fit(X_train, y_train)
 
 y_pred_t = clf.predict(X_train)
 
-confusion_matric = confusion_matrix(y_train, y_pred_t, binary=False)
-fig, ax = plot_confusion_matrix(conf_mat=confusion_matric)
-plt.show()
+#confusion_matric = confusion_matrix(y_train, y_pred_t, binary=False)
+#fig, ax = plot_confusion_matrix(conf_mat=confusion_matric)
+#plt.show()
 train_error = np.mean(np.equal(y_train,y_pred_t))
+print(y_train)
 print(train_error)
 
 
 y_pred = clf.predict(X_test)
-#print(y_pred)
-confusion_matric2 = confusion_matrix(y_test, y_pred, binary=False)
+print(y_pred)
+#confusion_matric2 = confusion_matrix(y_test, y_pred, binary=False)
 
-fig, ax = plot_confusion_matrix(conf_mat=confusion_matric2)
-plt.show()
+#fig, ax = plot_confusion_matrix(conf_mat=confusion_matric2)
+#plt.show()
 test_error = np.mean(np.equal(y_test,y_pred))
 print(test_error)
 
