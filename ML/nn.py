@@ -42,6 +42,9 @@ import numpy as np
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+from mlxtend.evaluate import confusion_matrix
+from mlxtend.plotting import plot_confusion_matrix
+import matplotlib.pyplot as plt
 
 import pandas
 df = pandas.read_csv('dataset with intensity 3-5-new.csv')
@@ -53,8 +56,8 @@ X=np.array(df[['Avg.PCC','Avg.Motion..','Average Intensity','Scene.Count','Frame
 y=np.squeeze(np.array(df[['Compression.Preset']]))
 #X = np.random.randint(1,10,size = (100,8))
 #y = np.random.choice([0,1],size = (100))
-print(X)
-print(y.shape)
+#print(X)
+#print(y.shape)
 X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = 0.2,random_state = 0)
 
 
@@ -65,12 +68,19 @@ clf.fit(X_train, y_train)
 
 y_pred_t = clf.predict(X_train)
 
+confusion_matric = confusion_matrix(y_train, y_pred_t, binary=False)
+fig, ax = plot_confusion_matrix(conf_mat=confusion_matric)
+plt.show()
 train_error = np.mean(np.equal(y_train,y_pred_t))
 print(train_error)
 
 
 y_pred = clf.predict(X_test)
-print(y_pred)
+#print(y_pred)
+confusion_matric2 = confusion_matrix(y_test, y_pred, binary=False)
 
+fig, ax = plot_confusion_matrix(conf_mat=confusion_matric2)
+plt.show()
 test_error = np.mean(np.equal(y_test,y_pred))
 print(test_error)
+
