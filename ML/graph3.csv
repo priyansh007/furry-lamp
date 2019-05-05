@@ -1,0 +1,10 @@
+size,algorithm,training accuracy,testing accuracy
+51,gradient boosting,100,45.45
+141,gradient boosting,89.9,50
+316,gradient boosting,85.37,56.25
+51,neural network,85.37,54.54
+141,neural network,85.37,36.36
+316,neural network,85.37,54.68
+51,random forest,100,27.27
+141,random forest,89.28,41.38
+316,random forest,78.26,54.68
