@@ -57,7 +57,7 @@ from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 import matplotlib.pyplot as plt
 
 import pandas
-df = pandas.read_csv('final_training_dataset_with_output_presets_317.csv')
+df = pandas.read_csv('dataset_317_2class.csv')
 #print()
 #Input array
 X=np.array(df[['Avg.PCC','Avg.Motion..','Scene.Count','Frames.per.Second','Original.Bitrate','Width','Height']])
@@ -71,9 +71,10 @@ y=np.squeeze(np.array(df[['Compression.Preset']]))
 X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = 0.2,random_state = 0)
 
 
-#clf = RandomForestClassifier(n_estimators=100, max_depth = 7, random_state=0)
-clf = GradientBoostingClassifier(n_estimators=65, max_depth = 2, random_state=0)
-
+clf = RandomForestClassifier(n_estimators=65, max_depth = 7, random_state=0)
+#clf = GradientBoostingClassifier(n_estimators=65, max_depth = 2, random_state=0)
+n_estimators=65
+max_depth=7
 clf.fit(X_train, y_train)
 
 y_pred_t = clf.predict(X_train)
@@ -82,16 +83,21 @@ y_pred_t = clf.predict(X_train)
 #fig, ax = plot_confusion_matrix(conf_mat=confusion_matric)
 #plt.show()
 train_error = np.mean(np.equal(y_train,y_pred_t))
-print(y_test)
-print(train_error)
-
 
 y_pred = clf.predict(X_test)
-print(y_pred)
+print(y_test+" : "+y_pred)
 #confusion_matric2 = confusion_matrix(y_test, y_pred, binary=False)
 
 #fig, ax = plot_confusion_matrix(conf_mat=confusion_matric2)
 #plt.show()
+
+print("Estimators")
+print(n_estimators)
+print("Max depth of tree")
+print(max_depth)
 test_error = np.mean(np.equal(y_test,y_pred))
+print("Training accuracy ")
+print(train_error)
+print("Testing accuracy ")
 print(test_error)
 
