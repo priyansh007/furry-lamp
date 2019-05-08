@@ -11,16 +11,54 @@
 import numpy as np
 from src.NeuralNetwork import NeuralNetwork
 import src.utils as utils
+import itertools
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import precision_recall_fscore_support
+import matplotlib.pyplot as plt
+
+def plot_confusion_matrix(cm, classes,
+                          normalize=False,
+                          title='Confusion matrix',
+                          cmap=plt.cm.Blues):
+    """
+    This function prints and plots the confusion matrix.
+    Normalization can be applied by setting `normalize=True`.
+    """
+    if normalize:
+        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+        print("Normalized confusion matrix")
+    else:
+        print('Confusion matrix, without normalization')
+
+    print(cm)
+
+    plt.imshow(cm, interpolation='nearest', cmap=cmap)
+    plt.title(title)
+    plt.colorbar()
+    tick_marks = np.arange(len(classes))
+    plt.xticks(tick_marks, classes, rotation=45)
+    plt.yticks(tick_marks, classes)
+
+    fmt = '.2f' if normalize else 'd'
+    thresh = cm.max() / 2.
+    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+        plt.text(j, i, format(cm[i, j], fmt),
+                 horizontalalignment="center",
+                 color="white" if cm[i, j] > thresh else "black")
+
+    plt.ylabel('True label')
+    plt.xlabel('Predicted label')
+    plt.tight_layout()
 
 def main():
     # ===================================
     # Settings
     # ===================================
-    csv_filename = "data/data_final_with_output_presets.csv"
-    hidden_layers = [10] # number of nodes in hidden layers i.e. [layer1, layer2, ...]
-    eta = 0.01 # learning rate
-    n_epochs = 40 # number of training epochs
-    n_folds = 4 # number of folds for cross-validation
+    csv_filename = "final_two class.csv"
+    hidden_layers = [6] # number of nodes in hidden layers i.e. [layer1, layer2, ...]
+    eta = 0.1 # learning rate
+    n_epochs = 400 # number of training epochs
+    n_folds = 6 # number of folds for cross-validation
     seed_crossval = 1 # seed for cross-validation
     seed_weights = 1 # seed for NN weight initialization
 
@@ -74,9 +112,29 @@ def main():
         acc_train.append(100*np.sum(y_train==ypred_train)/len(y_train))
         acc_valid.append(100*np.sum(y_valid==ypred_valid)/len(y_valid))
 
+        np.set_printoptions(precision=2)
+        #labels2=['veryfast', 'faster','fast', 'medium', 'slow', 'slower']
+        #labels=[0,1,2,3,4,5]
+        #print(y_train, y_valid, ypred_train, ypred_valid)
+        '''
+        confusion_matric = confusion_matrix(y_train.tolist(), ypred_train.tolist(), labels=labels)
+        plt.figure()
+        plot_confusion_matrix(confusion_matric, classes=labels2,
+                      title='Confusion matrix')
+        
+        confusion_matric2 = confusion_matrix(y_valid.tolist(), ypred_valid.tolist(), labels=labels)
+        plt.figure()
+        plot_confusion_matrix(confusion_matric2, classes=labels2,
+                      title='Confusion matrix')'''
+        
         # Print cross-validation result
         print(" Fold {}/{}: acc_train = {:.2f}%, acc_valid = {:.2f}% (n_train = {}, n_valid = {})".format(
             i+1, n_folds, acc_train[-1], acc_valid[-1], len(X_train), len(X_valid)))
+        
+        print(precision_recall_fscore_support(y_train.tolist(), ypred_train.tolist(), average='weighted'))
+
+        print(precision_recall_fscore_support(y_valid.tolist(), ypred_valid.tolist(), average='weighted'))
+        
 
     # ===================================
     # Print results
