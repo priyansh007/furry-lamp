@@ -109,7 +109,7 @@ X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = 0.2,random_stat
 
 
 #clf = RandomForestClassifier(n_estimators=65, max_depth = 7, random_state=0)
-clf = GradientBoostingClassifier(n_estimators=35, max_depth = 4, random_state=0)
+clf = GradientBoostingClassifier(n_estimators=65, max_depth = 2, random_state=0)
 
 clf.fit(X_train, y_train)
 
@@ -134,6 +134,9 @@ plt.figure()
 plot_confusion_matrix(confusion_matric2, classes=['veryfast', 'faster','fast', 'medium', 'slow', 'slower'],
                       title='Confusion matrix')
 test_error = np.mean(np.equal(y_test,y_pred))
+print("Training accuracy ")
+print(train_error)
+print("Testing accuracy ")
 print(test_error)
 
 print(precision_recall_fscore_support(y_train, y_pred_t, average='weighted'))
