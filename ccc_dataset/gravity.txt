@@ -1,0 +1,98 @@
+Obtained videos are :  ['gravity.falls.s02e20.1080p.bluray.x264-taxes.mkv']
+Processing file : gravity.falls.s02e20.1080p.bluray.x264-taxes.mkv
+Feature Extraction started for C:\Video Compression\Files\Input\gravity.falls.s02e20.1080p.bluray.x264-taxes.mkv .
+C:\Users\Admin\Anaconda3\lib\site-packages\scipy\stats\stats.py:3010: RuntimeWarning: invalid value encountered in double_scalars
+  r = r_num / r_den
+C:\Users\Admin\Anaconda3\lib\site-packages\scipy\stats\stats.py:5256: RuntimeWarning: invalid value encountered in less
+  x = np.where(x < 1.0, x, 1.0)  # if x > 1 then return 1.0
+Feature Extraction completed for C:\Video Compression\Files\Input\gravity.falls.s02e20.1080p.bluray.x264-taxes.mkv .
+Feature Extraction took 02:53:37
+Starting Compression Process on gravity.falls.s02e20.1080p.bluray.x264-taxes.mkv
+Indexing, please wait... 100% 
+Writing index... done.
+Compression complete
+Creating input video details
+Input Video Details acquired
+Creating compressed video details
+Compressed Video Details acquired
+Compression Duration = 1153.66
+Frame Count = 63271
+Compression Duration = 1415.87
+Frame Count = 63271
+Compression Duration = 2070.93
+Frame Count = 63271
+Compression Duration = 9355.45
+Frame Count = 63271
+Compression Duration = 3579.13
+Frame Count = 63271
+Compression Duration = 916.95
+Frame Count = 63271
+Compression Duration = 1155.17
+Frame Count = 63271
+Compression and Logging took 05:27:45
+Video Quality Measurement started for gravity.falls.s02e20.1080p.bluray.x264-taxes.mkv
+Generating original YUV
+
+Generating compressed YUV for superfast
+
+Comparing both YUVs
+Time: 25914.963s
+        AVG PSNR value : 42.85
+        AVG SSIM value : 0.9898499995742296
+        AVG VIFp value : 0.999999983385749
+Deleting compressed YUV
+Generating compressed YUV for veryfast
+
+Comparing both YUVs
+Time: 26408.780s
+        AVG PSNR value : 43.04
+        AVG SSIM value : 0.9912499996000752
+        AVG VIFp value : 0.9999999836899365
+Deleting compressed YUV
+Generating compressed YUV for faster
+
+Comparing both YUVs
+Time: 28670.414s
+        AVG PSNR value : 43.05
+        AVG SSIM value : 0.9912499996012577
+        AVG VIFp value : 0.9999999838045521
+Deleting compressed YUV
+Generating compressed YUV for fast
+
+Comparing both YUVs
+Time: 26254.098s
+        AVG PSNR value : 43.3
+        AVG SSIM value : 0.9916999996096479
+        AVG VIFp value : 0.9999999841483197
+Deleting compressed YUV
+Generating compressed YUV for medium
+
+Comparing both YUVs
+Time: 26356.339s
+        AVG PSNR value : 43.51
+        AVG SSIM value : 0.992499999610493
+        AVG VIFp value : 0.9999999844578045
+Deleting compressed YUV
+Generating compressed YUV for slow
+
+Comparing both YUVs
+Time: 25836.522s
+        AVG PSNR value : 43.93
+        AVG SSIM value : 0.9927499996256162
+        AVG VIFp value : 0.9999999850656399
+Deleting compressed YUV
+Generating compressed YUV for slower
+
+Comparing both YUVs
+Time: 26449.272s
+        AVG PSNR value : 43.98
+        AVG SSIM value : 0.9930499996315458
+        AVG VIFp value : 0.999999984982228
+Deleting compressed YUV
+Deleting original YUV
+Video Quality Measurement ended
+Video Quality Measurement took 06:35:35
+Appending rows in dataset
+done
+Processing complete
+Total Processing Time : 14:56:58
